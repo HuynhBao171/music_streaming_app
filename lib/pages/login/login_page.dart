@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/my_button.dart';
-import '../widgets/my_textfield.dart';
-import '../widgets/square_tile.dart';
+import 'widgets/my_button.dart';
+import 'widgets/my_textfield.dart';
+import 'widgets/square_tile.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -77,15 +77,11 @@ class LoginPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 25),
-
-              // sign in button
               MyButton(
                 onTap: signUserIn,
               ),
 
               const SizedBox(height: 50),
-
-              // or continue with
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
@@ -112,26 +108,16 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
               ),
-
               const SizedBox(height: 50),
-
-              // google + apple sign in buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  // google button
                   SquareTile(imagePath: '../images/google.png'),
-
                   SizedBox(width: 25),
-
-                  // apple button
                   SquareTile(imagePath: '../images/apple.png')
                 ],
               ),
-
               const SizedBox(height: 50),
-
-              // not a member? register now
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
