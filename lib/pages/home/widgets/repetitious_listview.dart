@@ -37,8 +37,7 @@ class RepetitiousListView extends StatelessWidget {
                                   height: 125,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 134, 134, 134)),
+                                          color: Color.fromARGB(255, 134, 134, 134)),
                                       color:
                                           Color.fromARGB(255, 200, 200, 200),
                                       borderRadius: BorderRadius.circular(5)),
@@ -52,8 +51,7 @@ class RepetitiousListView extends StatelessWidget {
                                   height: 130,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 134, 134, 134)),
+                                          color: Color.fromARGB(255, 134, 134, 134)),
                                       color:
                                           Color.fromARGB(255, 200, 200, 200),
                                       borderRadius: BorderRadius.circular(5)),

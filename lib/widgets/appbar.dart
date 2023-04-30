@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomAppBar extends StatelessWidget {
   String title;
-  CustomAppBar({required this.title,});
+  CustomAppBar({super.key, required this.title,});
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(

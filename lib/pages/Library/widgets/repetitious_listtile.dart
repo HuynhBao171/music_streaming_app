@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class RepetitiousListTile extends StatelessWidget {
   String title;
-  RepetitiousListTile(this.title);
+  RepetitiousListTile(this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {

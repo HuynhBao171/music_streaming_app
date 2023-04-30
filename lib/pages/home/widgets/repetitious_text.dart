@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class RepetitiousText extends StatelessWidget {
   String title;
-  RepetitiousText(this.title);
+  RepetitiousText(this.title, {super.key});
 
 
   @override

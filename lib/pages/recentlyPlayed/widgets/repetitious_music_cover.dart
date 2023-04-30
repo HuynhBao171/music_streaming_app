@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class RepetitiousMusicCover extends StatelessWidget {
   Widget? privateIcon;
-  RepetitiousMusicCover(this.privateIcon);
+  RepetitiousMusicCover(this.privateIcon, {super.key});
 
   @override
   Widget build(BuildContext context) {

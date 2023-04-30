@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'pages/login/login_page.dart';
-import 'widgets/navbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Music App',
       debugShowCheckedModeBanner: false,
-      home: CustomNavBar(),
+      home: LoginPage(),
     );
   }
 }

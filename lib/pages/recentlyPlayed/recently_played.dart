@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 
-import '../recentlyPlayed/widget/appbar.dart';
-import './widget/repetitious_artist_profile.dart';
-import './widget/repetitious_music_cover.dart';
+import 'widgets/appbar.dart';
+import 'widgets/repetitious_artist_profile.dart';
+import 'widgets/repetitious_music_cover.dart';
 
 class RecentlyPlayedScreen extends StatefulWidget {
   @override

@@ -18,13 +18,15 @@ class SearchPage extends StatelessWidget {
                 headerSliverBuilder: (ctx, i) => [
                       CustomAppBar(title: "Search",),
                     ],
-                body: MainBodySearch())),
+                body: const MainBodySearch())),
       ),
     );
   }
 }
 
 class MainBodySearch extends StatefulWidget {
+  const MainBodySearch({super.key});
+
   @override
   State<MainBodySearch> createState() => _MainBodySearchState();
 }

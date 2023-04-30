@@ -15,7 +15,7 @@ class CustomNavBar extends StatefulWidget {
 class _CustomNavBarState extends State<CustomNavBar> {
 int _selectedIndex = 0;
 
-  final List _screen = [
+  final List<Widget> screens = [
     const HomePage(),
     const SearchPage(),
     const LibraryPage(),
@@ -24,27 +24,34 @@ int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: screens,
+      ),
       bottomNavigationBar: Container(
         color: Colors.black,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal:15.0, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal:15.0, vertical: 20),
           child: GNav(
             backgroundColor: Colors.black,
             color: Colors.white,
             activeColor: Colors.orange,
             tabBackgroundColor: Colors.grey,
             gap: 20,
-            padding: EdgeInsets.all(16),
-            tabs: [
+            padding: const EdgeInsets.all(16),
+            tabs: const [
               GButton(
                 icon: Icons.home,
-                text: 'Home'),
+                text: 'Home',
+              ),
               GButton(
                 icon: Icons.search,
-                text: 'Search',),
+                text: 'Search',
+              ),
               GButton(
                 icon: Icons.library_books,
-                text: 'Library',)
+                text: 'Library',
+              ),
             ],
             selectedIndex: _selectedIndex,
               onTabChange: (index) {

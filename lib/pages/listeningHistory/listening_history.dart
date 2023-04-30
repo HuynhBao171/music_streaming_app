@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:animate_do/animate_do.dart';
 import '../Library/widgets/repetitious_listening_history.dart';
-import './widget/appbar.dart';
+import 'widgets/appbar.dart';
 
 class ListeningHistoryScreen extends StatefulWidget {
   @override

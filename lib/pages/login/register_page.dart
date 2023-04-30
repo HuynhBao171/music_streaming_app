@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/navbar.dart';
-import 'register_page.dart';
+import 'login_page.dart';
 import 'widgets/my_button.dart';
 import 'widgets/my_textfield.dart';
 import 'widgets/square_tile.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmpasswordController = TextEditingController();
 
   // sign user in method
   void signUserIn() {}
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 50),
               Text(
-                'Welcome back you\'ve been missed!',
+                'Let\'s create an account for you!',
                 style: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 16,
@@ -56,21 +57,14 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: true,
               ),
               const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ],
-                ),
+              MyTextField(
+                controller: confirmpasswordController,
+                hintText: 'Confirm Password',
+                obscureText: true,
               ),
               const SizedBox(height: 25),
               MyButton(
-                text: "Sign in",
+                text: "Sign up",
                 onTap: (){
                       Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => CustomNavBar())));
@@ -117,17 +111,17 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Not a member?',
+                    'Already have an account?',
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   const SizedBox(width: 4),
                   GestureDetector(
                     onTap: (){
                       Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => RegisterPage())));
+                            builder: ((context) => LoginPage())));
                     },
                     child: const Text(
-                      'Register now',
+                      'Login now',
                       style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.bold,
