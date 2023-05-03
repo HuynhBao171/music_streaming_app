@@ -31,7 +31,7 @@ int _selectedIndex = 0;
       bottomNavigationBar: Container(
         color: Colors.black,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:15.0, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal:20.0, vertical: 5 ),
           child: GNav(
             backgroundColor: Colors.black,
             color: Colors.white,

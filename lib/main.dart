@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/login/login_page.dart';
+import 'widgets/navbar.dart';
 
 void main() {
   runApp(const MyApp());
