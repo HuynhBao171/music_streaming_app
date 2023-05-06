@@ -4,12 +4,12 @@ import 'package:animate_do/animate_do.dart';
 import '../Library/widgets/repetitious_listening_history.dart';
 import 'widgets/appbar.dart';
 
-class ListeningHistoryScreen extends StatefulWidget {
+class ListeningHistoryPage extends StatefulWidget {
   @override
-  State<ListeningHistoryScreen> createState() => _ListeningHistoryScreenState();
+  State<ListeningHistoryPage> createState() => _ListeningHistoryPageState();
 }
 
-class _ListeningHistoryScreenState extends State<ListeningHistoryScreen> {
+class _ListeningHistoryPageState extends State<ListeningHistoryPage> {
   bool trash = false;
 
   @override

@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: NestedScrollView(
             headerSliverBuilder: (ctx, i) => [
-                  CustomAppBar(title: "Search"),
+                  CustomAppBar(title: "Home"),
                 ],
             body: MainBody()),
       ),

@@ -42,11 +42,17 @@ class MainBodyLibrary extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            GestureDetector(
+              onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: ((context) => RecentlyPlayedPage())));
+                      },
+              child: RepetitiousListTile("Profile")
+            ),
             RepetitiousListTile("Liked tracks"),
             RepetitiousListTile("Playlists"),
             RepetitiousListTile("Albums"),
             RepetitiousListTile("Following"),
-            RepetitiousListTile("Stations"),
             SizedBox(
               height: 15,
             ),
@@ -61,7 +67,7 @@ class MainBodyLibrary extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => RecentlyPlayedScreen())));
+                            builder: ((context) => RecentlyPlayedPage())));
                       },
                       child: Text(
                         "See All",
@@ -91,7 +97,7 @@ class MainBodyLibrary extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => ListeningHistoryScreen())));
+                            builder: ((context) => ListeningHistoryPage())));
                       },
                       child: Text(
                         "See All",

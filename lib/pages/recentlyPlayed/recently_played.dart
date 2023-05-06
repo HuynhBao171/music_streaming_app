@@ -5,12 +5,12 @@ import 'widgets/appbar.dart';
 import 'widgets/repetitious_artist_profile.dart';
 import 'widgets/repetitious_music_cover.dart';
 
-class RecentlyPlayedScreen extends StatefulWidget {
+class RecentlyPlayedPage extends StatefulWidget {
   @override
-  State<RecentlyPlayedScreen> createState() => _RecentlyPlayedScreenState();
+  State<RecentlyPlayedPage> createState() => _RecentlyPlayedPageState();
 }
 
-class _RecentlyPlayedScreenState extends State<RecentlyPlayedScreen> {
+class _RecentlyPlayedPageState extends State<RecentlyPlayedPage> {
   bool trash = false;
 
   @override
