@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RepetitiousListView extends StatelessWidget {
-  const RepetitiousListView({ Key? key }) : super(key: key);
+class RepetitiousListViewHorizontal extends StatelessWidget {
+  const RepetitiousListViewHorizontal({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 
 // this model created just for showing follow & unfollow artist on home screen
 class Artist {
-  bool isFollwed;
+  bool isFollowed;
 
-  Artist(this.isFollwed);
+  Artist(this.isFollowed);
 }

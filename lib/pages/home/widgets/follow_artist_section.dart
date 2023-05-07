@@ -58,11 +58,11 @@ class _FollowArtistSectionState extends State<FollowArtistSection> {
                 SizedBox(
                   height: 15,
                 ),
-                followed[index].isFollwed
+                followed[index].isFollowed
                     ? GestureDetector(
                        onTap: () {
                           setState(() {
-                            followed[index].isFollwed = !followed[index].isFollwed;
+                            followed[index].isFollowed =! followed[index].isFollowed;
                           });
                         },
                       child: AnimatedContainer(
@@ -86,7 +86,7 @@ class _FollowArtistSectionState extends State<FollowArtistSection> {
                     :GestureDetector(
                         onTap: () {
                           setState(() {
-                            followed[index].isFollwed = !followed[index].isFollwed;
+                            followed[index].isFollowed = !followed[index].isFollowed;
                           });
                         },
                         child: AnimatedContainer(

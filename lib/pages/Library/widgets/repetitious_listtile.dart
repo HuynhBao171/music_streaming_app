@@ -1,38 +1,25 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
-class RepetitiousListTile extends StatelessWidget {
-  String title;
-  RepetitiousListTile(this.title, {super.key});
+class ActivityCard extends StatelessWidget {
+  const ActivityCard({super.key, required this.title, required this.icon});
+
+  final String title;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 5),
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(
-                title,
-                style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                    color: Color.fromARGB(255, 134, 134, 134)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 11),
-              child: Icon(
-                Icons.arrow_forward_ios,
-                color: Color.fromARGB(255, 134, 134, 134),
-                size: 15,
-              ),
-            ),
-            
-          ]),
+    return InkWell(
+      onTap: () {},
+      child: ListTile(
+        contentPadding: const EdgeInsets.only(left: 8),
+        leading: Icon(icon, color: Colors.white, size: 32),
+        trailing: const Icon(Icons.keyboard_arrow_right_outlined, color: Colors.white, size: 46,),
+        title: Text(title, style: const TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+          fontWeight: FontWeight.w600
+        )),
+      ),
     );
   }
 }

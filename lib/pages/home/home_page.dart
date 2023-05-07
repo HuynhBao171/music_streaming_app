@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:music_streaming_app/pages/home/widgets/follow_artist_section.dart';
 
 import '../../widgets/appbar.dart';
+import '../../widgets/repetitious_double_text.dart';
+import '../../widgets/repetitious_listview_horizontal.dart';
+import '../../widgets/repetitious_text.dart';
 import 'widgets/below_upload_section.dart';
-import 'widgets/follow_artist_section.dart';
-import 'widgets/repetitious_double_text.dart';
-import 'widgets/repetitious_listview.dart';
-import 'widgets/repetitious_text.dart';
 import 'widgets/upload_section.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,7 +45,7 @@ class MainBody extends StatelessWidget {
         SizedBox(
           height: 5,
         ),
-        RepetitiousListView(),
+        RepetitiousListViewHorizontal(),
         SizedBox(
           height: 10,
         ),
@@ -53,12 +53,12 @@ class MainBody extends StatelessWidget {
         SizedBox(
           height: 5,
         ),
-        RepetitiousListView(),
+        RepetitiousListViewHorizontal(),
         SizedBox(
           height: 10,
         ),
         ReapetedDoubleText(
-            title: "The Uplooad",
+            title: "The Upload",
             subtitle: "Newly posted tracks. Just for you"),
         UploadSectionWidget(),
         BelowUploadSectionWidet(),
@@ -81,7 +81,7 @@ class MainBody extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        RepetitiousListView(),
+        RepetitiousListViewHorizontal(),
         SizedBox(
           height: 5,
         ),
@@ -91,7 +91,7 @@ class MainBody extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        RepetitiousListView(),
+        RepetitiousListViewHorizontal(),
         SizedBox(
           height: 5,
         ),
@@ -101,7 +101,7 @@ class MainBody extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        RepetitiousListView(),
+        RepetitiousListViewHorizontal(),
         SizedBox(
           height: 5,
         ),
