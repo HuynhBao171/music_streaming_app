@@ -8,15 +8,14 @@ class ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
+    return Container(
       child: ListTile(
-        contentPadding: const EdgeInsets.only(left: 8),
-        leading: Icon(icon, color: Colors.white, size: 32),
-        trailing: const Icon(Icons.keyboard_arrow_right_outlined, color: Colors.white, size: 46,),
+        contentPadding: const EdgeInsets.only(left: 15),
+        leading: Icon(icon, color: Color.fromARGB(255, 134, 134, 134), size: 32),
+        trailing: const Icon(Icons.keyboard_arrow_right_outlined, color: Color.fromARGB(255, 134, 134, 134), size: 46,),
         title: Text(title, style: const TextStyle(
           fontSize: 17,
-          color: Colors.white,
+          color: Color.fromARGB(255, 134, 134, 134),
           fontWeight: FontWeight.w600
         )),
       ),

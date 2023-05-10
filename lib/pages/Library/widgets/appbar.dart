@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../profile/profile.dart';
+
 
 
 class CustomAppBarLibrary extends StatelessWidget {
@@ -24,9 +26,15 @@ class CustomAppBarLibrary extends StatelessWidget {
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 15,top: 10),
-          child: CircleAvatar(
-            radius: 30,
-            backgroundImage: NetworkImage("https://avatars.githubusercontent.com/u/91388754?v=4"),
+          child: GestureDetector(
+            onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: ((context) => ProfilePage())));
+                },
+            child: CircleAvatar(
+              radius: 30,
+              backgroundImage: NetworkImage("https://avatars.githubusercontent.com/u/91388754?v=4"),
+            ),
           )
         ),
       ],

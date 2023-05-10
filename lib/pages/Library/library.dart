@@ -7,7 +7,7 @@ import '../listeningHistory/listening_history.dart';
 import '../profile/profile.dart';
 import '../recentlyPlayed/recently_played.dart';
 import 'widgets/appbar.dart';
-import 'widgets/repetitious_listtile.dart';
+import 'widgets/activity_card.dart';
 
 class LibraryPage extends StatelessWidget {
   const LibraryPage({super.key});
@@ -41,7 +41,7 @@ class MainBodyLibrary extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
+            InkWell(
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: ((context) => ProfilePage())));
