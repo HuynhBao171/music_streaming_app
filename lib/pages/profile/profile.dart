@@ -5,7 +5,7 @@ import '../../widgets/repetitious_listview_vertical.dart';
 import '../../widgets/repetitious_text.dart';
 import '../listeningHistory/widgets/repetitious_listening_history.dart';
 import '../listeningHistory/listening_history.dart';
-import 'widgets/appbar.dart';
+import 'widgets/appbar_profile.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

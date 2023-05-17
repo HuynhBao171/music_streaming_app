@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-
-import 'widgets/appbar.dart';
+import 'widgets/appbar_recentlyplayed.dart';
 import 'widgets/repetitious_artist_profile.dart';
 import 'widgets/repetitious_music_cover.dart';
 

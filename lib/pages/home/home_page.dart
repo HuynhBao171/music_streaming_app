@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:music_streaming_app/pages/home/widgets/follow_artist_section.dart';
-
-import '../../widgets/appbar.dart';
 import '../../widgets/repetitious_double_text.dart';
 import '../../widgets/repetitious_listview_horizontal.dart';
 import '../../widgets/repetitious_text.dart';
+import 'widgets/appbar_home.dart';
 import 'widgets/below_upload_section.dart';
 import 'widgets/upload_section.dart';
 
@@ -23,7 +22,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: NestedScrollView(
             headerSliverBuilder: (ctx, i) => [
-                  CustomAppBar(title: "Home"),
+                  CustomAppBarHome(),
                 ],
             body: MainBody()),
       ),

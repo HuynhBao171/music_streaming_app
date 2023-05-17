@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../profile/profile.dart';
-
-
-
 class CustomAppBarLibrary extends StatelessWidget {
   const CustomAppBarLibrary({
     Key? key,

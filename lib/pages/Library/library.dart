@@ -6,7 +6,7 @@ import '../../widgets/repetitious_text.dart';
 import '../listeningHistory/listening_history.dart';
 import '../profile/profile.dart';
 import '../recentlyPlayed/recently_played.dart';
-import 'widgets/appbar.dart';
+import 'widgets/appbar_library.dart';
 import 'widgets/activity_card.dart';
 
 class LibraryPage extends StatelessWidget {

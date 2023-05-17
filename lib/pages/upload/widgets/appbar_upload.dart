@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 // ignore: must_be_immutable
-class CustomAppBarProfile extends StatelessWidget {
+class CustomAppBarUpload extends StatelessWidget {
   String title;
-  CustomAppBarProfile({super.key, required this.title,});
+  CustomAppBarUpload({super.key, required this.title,});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,7 @@ class CustomAppBarProfile extends StatelessWidget {
       pinned: true,
       expandedHeight: 100,
       flexibleSpace: FlexibleSpaceBar(
+        centerTitle: true,
         titlePadding: EdgeInsets.only(left: 20, bottom: 10),
         title: Text(
           title,

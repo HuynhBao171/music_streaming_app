@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_streaming_app/pages/home/home_page.dart';
 import 'pages/login/login_page.dart';
 import 'widgets/navbar.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Music App',
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }
