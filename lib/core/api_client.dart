@@ -12,7 +12,7 @@ class ApiClient {
       Response response = await _dio.post(
         '/api/v1/users',
         data: {
-          'username': username,
+          'Id': username,
           'email': email,
           'password': password,
         },
@@ -27,7 +27,7 @@ class ApiClient {
   Future<Response?> login(String username, String password) async {
     try {
       Response response = await _dio.post(
-        '${Endpoint}/Accounts/login/$username&$password',
+        '${Endpoint.music}/Accounts/login/$username&$password',
       );
 
       return response;
