@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:dio/dio.dart';
+import '../../core/api_client.dart';
 import '../../widgets/navbar.dart';
 import 'login_page.dart';
 import 'widgets/my_button.dart';
@@ -14,12 +15,36 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final ApiClient _apiClient = ApiClient();
   final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final confirmpasswordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() {}
+  void signUserIn() async {
+    try {
+      final response = await _apiClient.signup(usernameController.toString(),emailController.toString(), passwordController.toString());
+
+      if (response?.statusCode == 200) {
+        // The user was successfully signed up.
+        Navigator.of(context).push(MaterialPageRoute(
+                            builder: ((context) => CustomNavBar())));
+      } else {
+        // There was an error signing up the user.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response?.data['message']),
+          ),
+        );
+      }
+    } on DioError catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.response!.data['message']),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,22 +77,21 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 10),
               MyTextField(
-                controller: passwordController,
-                hintText: 'Password',
+                controller: emailController,
+                hintText: 'Email',
                 obscureText: true,
               ),
               const SizedBox(height: 10),
               MyTextField(
-                controller: confirmpasswordController,
-                hintText: 'Confirm Password',
+                controller: passwordController,
+                hintText: 'Password',
                 obscureText: true,
               ),
               const SizedBox(height: 25),
               MyButton(
                 text: "Sign up",
                 onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => CustomNavBar())));
+                      signUserIn();
                     },
               ),
               const SizedBox(height: 50),

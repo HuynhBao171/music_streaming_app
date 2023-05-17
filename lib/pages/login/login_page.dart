@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:dio/dio.dart';
+import '../../core/api_client.dart';
 import '../../widgets/navbar.dart';
 import 'register_page.dart';
 import 'widgets/my_button.dart';
@@ -14,11 +15,36 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameController = TextEditingController();
+  final ApiClient _apiClient = ApiClient();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() {}
+  void LogIn() async {
+    try {
+      final response = await _apiClient.login(emailController.toString(), passwordController.toString());
+
+      if (response?.statusCode == 200) {
+        // The user was successfully signed up.
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((context) => CustomNavBar())));
+      } else {
+        // There was an error signing up the user.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response?.data['message']),
+          ),
+        );
+      }
+    } on DioError catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.response!.data['message']),
+        ),
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 25),
               MyTextField(
-                controller: usernameController,
+                controller: emailController,
                 hintText: 'Username',
                 obscureText: false,
               ),
@@ -71,9 +97,8 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 25),
               MyButton(
                 text: "Sign in",
-                onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => CustomNavBar())));
+                onTap: () async{
+                  LogIn();
                     },
               ),
               const SizedBox(height: 50),

@@ -6,6 +6,7 @@ import '../pages/home/home_page.dart';
 import '../pages/search/search_page.dart';
 
 class CustomNavBar extends StatefulWidget {
+  static String id = "BottomNavbar";
   const CustomNavBar({super.key});
 
   @override
