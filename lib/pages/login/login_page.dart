@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/api_client.dart';
 import '../../widgets/navbar.dart';
 import 'register_page.dart';
@@ -8,6 +9,7 @@ import 'widgets/my_textfield.dart';
 import 'widgets/square_tile.dart';
 
 class LoginPage extends StatefulWidget {
+  static String id = "LoginPage";
   const LoginPage({super.key});
 
   @override
@@ -26,6 +28,9 @@ class _LoginPageState extends State<LoginPage> {
 
       if (response?.statusCode == 200) {
         // The user was successfully signed up.
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool("loggedIn", true);
+        prefs.setString("UserEmail", emailController.toString());
         Navigator.of(context).push(MaterialPageRoute(
           builder: ((context) => CustomNavBar())));
       } else {
@@ -99,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                 text: "Sign in",
                 onTap: () async{
                   LogIn();
-                    },
+                },
               ),
               const SizedBox(height: 50),
               Padding(

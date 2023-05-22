@@ -79,7 +79,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
               ],
             ),
           ),
-          SizedBox(height:10),
+          SizedBox(height:15),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
@@ -104,7 +104,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
               ),
             ),
             RepetitiousListViewVertical(),
-
+            SizedBox(height:15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(

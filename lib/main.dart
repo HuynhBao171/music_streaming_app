@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Music App',
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: CustomNavBar(),
     );
   }
 }

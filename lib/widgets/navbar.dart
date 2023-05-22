@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import '../pages/Library/library.dart';
+import '../pages/Library/library_page.dart';
 import '../pages/home/home_page.dart';
 import '../pages/search/search_page.dart';
 
