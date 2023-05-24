@@ -22,7 +22,7 @@ class CustomAppBarUpload extends StatelessWidget {
       expandedHeight: 100,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        titlePadding: EdgeInsets.only(left: 20, bottom: 10),
+        titlePadding: EdgeInsets.only(bottom: 13, right: 180),
         title: Text(
           title,
           style: TextStyle(fontSize: 27, color: Colors.black),
