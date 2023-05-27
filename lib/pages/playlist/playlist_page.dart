@@ -1,174 +1,159 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter/src/widgets/placeholder.dart';
+import 'dart:io';
 
-// import '../../utils/API-Model.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:line_icons/line_icons.dart';
 
-// class PlayListPage extends StatefulWidget {
-//   static String id = "PlaylistPage";
-//   bool play = false;
+import '../login/widgets/my_textfield.dart';
+import 'widgets/appbar_playlist.dart';
 
-//   const PlayListPage({
-//     super.key, 
-//     required this.title,
-//     required this.songs,
-//   });
+class PlaylistPage extends StatefulWidget {
+  const PlaylistPage({super.key});
 
-//   final String title;
-//   final List<Songs> songs;
-//   @override
-//   State<PlayListPage> createState() => _PlayListPageState();
-// }
+  @override
+  State<PlaylistPage> createState() => _PlaylistPageState();
+}
 
-// class _PlayListPageState extends State<PlayListPage> {
-//   FocusNode focusNode = FocusNode();
+class _PlaylistPageState extends State<PlaylistPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: NestedScrollView(
+            headerSliverBuilder: (ctx, i) => [
+                  CustomAppBarPlaylist(title: "Playlist"),
+                ],
+            body: MainBodyPlaylist()),
+      ),
+    );
+  }
+}
 
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     Future<Null>.delayed(Duration.zero, () {
-//       if(widget.songs.isEmpty){
-//         ScaffoldMessenger.of(context).showSnackBar(
-//             SnackBar(content: Text("Internal Error, Server might be down"))
-//         );
-//       }
-//     });
-//   }
+class MainBodyPlaylist extends StatefulWidget {
+  const MainBodyPlaylist({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     double height = MediaQuery.of(context).size.height;
-//     double width = MediaQuery.of(context).size.width;
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Theme.of(context).colorScheme.primary,
-//         automaticallyImplyLeading: false,
-//         toolbarHeight: height*0.165,
-//         elevation: 0,
-//         flexibleSpace: Padding(
-//           padding: EdgeInsets.fromLTRB(20, height * 0.04, 20, 0),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: <Widget>[
-//               const GoBackButton(
-//                 padding: EdgeInsets.fromLTRB(0, 25, 0, 15),
-//               ),
-//               Text(
-//                 widget.title,
-//                 textAlign: TextAlign.left,
-//                 style: GoogleFonts.outfit(
-//                   textStyle: TextStyle(
-//                     fontSize: 30,
-//                     fontWeight: FontWeight.bold,
-//                     color: Theme.of(context).colorScheme.secondary,
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 20,
-//               ),
+  @override
+  State<MainBodyPlaylist> createState() => _MainBodyPlaylistState();
+}
 
-//             ],
-//           ),
-//         ),
-//       ),
+class _MainBodyPlaylistState extends State<MainBodyPlaylist>
+    with TickerProviderStateMixin {
+  File? _image;
+  AnimationController? controller;
 
-//       body: Padding(
-//         padding: const EdgeInsets.symmetric(vertical: 2.0),
-//         child: Container(
-//           child: ListView.builder(
-//             scrollDirection: Axis.vertical,
-//             shrinkWrap: true,
-//             itemCount: widget.songs.length,
-//             itemBuilder: (context, index) {
-//               return ListTile(
-//                   focusNode: focusNode,
-//                 leading: Image.network(widget.songs[index].thumbnailUrl,),
-//                 subtitle: (widget.songs[index].channelTitle == "  ") ? null :
-//                 Text(
-//                   widget.songs[index].channelTitle,
-//                   style: kMusicInfoStyle,
-//                 ),
-//                 title: Text(
-//                   widget.songs[index].title,
-//                   style: kMusicTitleStyle,
-//                 ),
-//                 trailing: GestureDetector(
-//                   onTap: () async {
-//                     await showModalBottomSheet(
-//                         context: context,
-//                         builder: (context) {
-//                           return Container(
-//                             color: Theme.of(context).colorScheme.tertiary,
-//                             child: Column(
-//                               mainAxisSize: MainAxisSize.min,
-//                               children: <Widget>[
-//                                 ListTile(
-//                                   leading: Icon(Icons.play_arrow, color: Colors.white,),
-//                                   title: Text(
-//                                     'Play',
-//                                     style: GoogleFonts.outfit(
-//                                         textStyle: TextStyle(
-//                                           fontSize: 18
-//                                         )
-//                                     ),
-//                                   ),
-//                                   onTap: () {
-//                                     setState(() {
-//                                       widget.play = true;
-//                                     });
-//                                     Navigator.pop(context);
-//                                   },
-//                                 ),
-//                                 ListTile(
-//                                   leading: Icon(Icons.close,  color: Colors.white,),
-//                                   title: Text('Remove'),
-//                                   onTap: () {
-//                                     setState(() {
-//                                       widget.songs.remove(widget.songs[index]);
-//                                       widget.play = false;
-//                                     });
-//                                     Navigator.pop(context);
-//                                   },
-//                                 ),
-//                               ],
-//                             ),
-//                           );
-//                         });
-//                     (widget.play) ? Navigator.push(
-//                       context,
-//                       MaterialPageRoute(
-//                         builder: (context) => VideoPlayerScreen(
-//                           videoId: widget.songs[index].id,
-//                           thumbnailUrl: widget.songs[index].thumbnailUrl,
-//                           title: widget.songs[index].title,
-//                           channelTitle: widget.songs[index].channelTitle,
-//                         ),
-//                       ),
-//                     ) : null;
-//                   },
-//                   child: Icon(Icons.more_vert, color: Colors.grey,),
-//                 ),
-//                 onTap: () => {
-//                   Navigator.push(
-//                     context,
-//                     MaterialPageRoute(
-//                       builder: (context) => VideoPlayerScreen(
-//                         videoId: widget.songs[index].id,
-//                         thumbnailUrl: widget.songs[index].thumbnailUrl,
-//                         title: widget.songs[index].title,
-//                         channelTitle: widget.songs[index].channelTitle,
-//                       ),
-//                     ),
-//                   )
-//                 },
-//               );
-//             },
-//           ),
-//         ),
-//       ),
+  @override
+  initState() {
+    super.initState();
+    controller = BottomSheet.createAnimationController(this);
+    controller?.duration = const Duration(seconds: 1);
+    controller?.reverseDuration = const Duration(seconds: 0);
+    controller?.drive(CurveTween(curve: Curves.easeIn));
+  }
 
-//     );
-//   }
-// }
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final currentWidth = MediaQuery.of(context).size.width;
+    final currentHeight = MediaQuery.of(context).size.height;
+    return Container(
+      width: currentWidth,
+      height: currentHeight,
+      child: Center(
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                _selectImage();
+              },
+              child: Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                ),
+                child: Center(
+                  child: _image != null
+                      ? Image.file(
+                          _image!,
+                          width: 150,
+                          height: 150,
+                          fit: BoxFit.cover,
+                        )
+                      : Icon(LineIcons.camera),
+                ),
+              ),
+            ),
+            MyTextField(
+              labelText: 'Username',
+              obscureText: false,
+              controller: null,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _selectImage() async {
+    // Show a bottom sheet
+    showModalBottomSheet(
+      context: context,
+      transitionAnimationController: controller,
+      enableDrag: true,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              title: const Text('Select Image from Gallery'),
+              onTap: () async {
+                var image =
+                    await ImagePicker().pickImage(source: ImageSource.gallery);
+
+                // If the user didn't pick an image, return
+                if (image == null) {
+                  return;
+                }
+
+                // Set the image as the state
+                setState(() {
+                  _image = File(image.path);
+                });
+
+                // Close the bottom sheet
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Take a Photo'),
+              onTap: () async {
+                var image =
+                    await ImagePicker().pickImage(source: ImageSource.camera);
+
+                // If the user didn't pick an image, return
+                if (image == null) {
+                  return;
+                }
+
+                // Set the image as the state
+                setState(() {
+                  _image = File(image.path);
+                });
+
+                // Close the bottom sheet
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

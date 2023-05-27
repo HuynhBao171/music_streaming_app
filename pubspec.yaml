@@ -43,6 +43,7 @@ dependencies:
   shared_preferences: ^2.1.1
   file_picker: ^5.3.1
   image_picker: ^0.8.7+5
+  palette_generator: ^0.3.3+2
 
 dev_dependencies:
   flutter_test:
