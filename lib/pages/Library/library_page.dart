@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/repetitious_listview_horizontal.dart';
+import '../../model/playlist.dart';
+import '../../widgets/playlist_listview_horizontal.dart';
 import '../../widgets/repetitious_listview_vertical.dart';
 import '../../widgets/repetitious_text.dart';
-import '../listeningHistory/listening_history.dart';
-import '../profile/profile.dart';
-import '../recentlyPlayed/recently_played.dart';
+import '../ListeningHistory/listening_history.dart';
+import '../ManagerPlaylist/manager_playlist_page.dart';
+import '../Profile/profile.dart';
+import '../RecentlyPlayed/recently_played.dart';
 import 'widgets/appbar_library.dart';
 import 'widgets/activity_card.dart';
 
 class LibraryPage extends StatelessWidget {
+  static String id = "Library";
   const LibraryPage({super.key});
 
   @override
@@ -54,7 +57,12 @@ class MainBodyLibrary extends StatelessWidget {
             Divider(
               color: Colors.grey.shade800,
             ),
-            ActivityCard(title:"Playlists", icon: Icons.album),
+            InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: ((context) => ManagerPlaylistPage())));
+                },
+                child: ActivityCard(title:"Playlists", icon: Icons.album)),
             Divider(
               color: Colors.grey.shade800,
             ),
@@ -88,7 +96,7 @@ class MainBodyLibrary extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            RepetitiousListViewHorizontal(),
+            PlaylistListViewHorizontal(playlists: Playlist.album,),
             SizedBox(
               height: 15,
             ),
@@ -115,7 +123,7 @@ class MainBodyLibrary extends StatelessWidget {
                 ],
               ),
             ),
-            RepetitiousListViewVertical(),
+            RepetitiousListViewVertical(height: 240,),
           ],
         ),
       ),

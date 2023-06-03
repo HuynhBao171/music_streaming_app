@@ -5,6 +5,7 @@ import '../../widgets/appbar.dart';
 import 'widgets/repetitious_search_result.dart';
 
 class SearchPage extends StatelessWidget {
+  static String id = "Search";
   const SearchPage({Key? key}) : super(key: key);
 
   @override

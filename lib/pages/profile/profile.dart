@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../model/playlist.dart';
+import '../../widgets/playlist_listview_horizontal.dart';
 import '../../widgets/repetitious_listview_horizontal.dart';
 import '../../widgets/repetitious_listview_vertical.dart';
 import '../../widgets/repetitious_text.dart';
-import '../listeningHistory/widgets/repetitious_listening_history.dart';
-import '../listeningHistory/listening_history.dart';
+import '../ListeningHistory/widgets/repetitious_listening_history.dart';
+import '../ListeningHistory/listening_history.dart';
 import 'widgets/appbar_profile.dart';
 
 class ProfilePage extends StatefulWidget {
+  static String id = "Profile";
   const ProfilePage({super.key});
 
   @override
@@ -50,7 +53,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
           children: [
            CircleAvatar(
             backgroundColor: Color(0xffB1B1B1),
-            backgroundImage: NetworkImage("https://avatars.githubusercontent.com/u/91388754?v=4"),
+            backgroundImage: AssetImage('assets/images/demo.png'),
             radius: 60,
           ), 
           SizedBox(height:10),
@@ -103,7 +106,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
                 ],
               ),
             ),
-            RepetitiousListViewVertical(),
+            RepetitiousListViewVertical(height: 240,),
             SizedBox(height:15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -131,7 +134,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
             SizedBox(
               height: 5,
             ),
-            RepetitiousListViewHorizontal(),
+            PlaylistListViewHorizontal(playlists: Playlist.album,),
 
           ],
         ),

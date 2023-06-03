@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:line_icons/line_icons.dart';
 
 // ignore: must_be_immutable
 class CustomAppBarPlaylist extends StatelessWidget {
@@ -22,13 +21,12 @@ class CustomAppBarPlaylist extends StatelessWidget {
       expandedHeight: 100,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        titlePadding: EdgeInsets.only(bottom: 13, right: 180),
         title: Text(
           title,
           style: TextStyle(fontSize: 27, color: Colors.black),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       elevation: 0,
       floating: true,
     );

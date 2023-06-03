@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:music_streaming_app/pages/login/login_page.dart';
 import 'package:music_streaming_app/widgets/navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../login/widgets/my_button.dart';
+import '../Auth/login_page.dart';
+import '../Auth/widgets/my_button.dart';
 import 'widgets/appbar_dashboard.dart';
 
 class DashboardPage extends StatefulWidget {
+  static String id = "Dashboard";
   const DashboardPage({super.key});
 
   @override
@@ -41,7 +42,7 @@ class _MainBodyDashboardState extends State<MainBodyDashboard> {
 
   Future<void> getDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("UserEmail", "Huynh@gmail.com");
+    prefs.setString("UserEmail", "manduong2k2");
     username = prefs.getString("UserEmail")!;
   }
 
@@ -58,8 +59,7 @@ class _MainBodyDashboardState extends State<MainBodyDashboard> {
           SizedBox(height: 180),
           CircleAvatar(
             radius: 70,
-            backgroundImage: NetworkImage(
-                "https://avatars.githubusercontent.com/u/91388754?v=4"),
+            backgroundImage: AssetImage('assets/images/demo.png')
           ),
           SizedBox(height: 20),
           FutureBuilder(

@@ -5,10 +5,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../login/widgets/my_textfield.dart';
+import '../Auth/widgets/my_textfield.dart';
 import 'widgets/appbar_upload.dart';
 
 class UploadPage extends StatefulWidget {
+  static String id = "Upload";
   const UploadPage({super.key});
 
   @override

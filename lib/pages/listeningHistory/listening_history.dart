@@ -5,6 +5,7 @@ import 'widgets/repetitious_listening_history.dart';
 import 'widgets/appbar_listeninghistory.dart';
 
 class ListeningHistoryPage extends StatefulWidget {
+  static String id = "ListeningHistory";
   @override
   State<ListeningHistoryPage> createState() => _ListeningHistoryPageState();
 }

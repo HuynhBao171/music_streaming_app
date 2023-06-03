@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../dashboard/dashboard_page.dart';
-import '../../profile/profile.dart';
+import '../../Dashboard/dashboard_page.dart';
+import '../../Profile/profile.dart';
 
 class CustomAppBarLibrary extends StatelessWidget {
   const CustomAppBarLibrary({
@@ -32,8 +32,7 @@ class CustomAppBarLibrary extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: 30,
-                backgroundImage: NetworkImage(
-                    "https://avatars.githubusercontent.com/u/91388754?v=4"),
+                backgroundImage: AssetImage('assets/images/demo.png'),
               ),
             )),
       ],

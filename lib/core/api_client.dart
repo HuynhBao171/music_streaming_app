@@ -26,8 +26,11 @@ class ApiClient {
 
   Future<Response?> login(String username, String password) async {
     try {
+      // Response response = await _dio.post(
+      //   '${Endpoint.music}/Accounts/login/$username&$password',
+      // );
       Response response = await _dio.post(
-        '${Endpoint.music}/Accounts/login/$username&$password',
+        'https://manduong2k2.bsite.net/api/Accounts/login/$username&$password',
       );
 
       return response;

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../pages/Library/library_page.dart';
-import '../pages/home/home_page.dart';
-import '../pages/search/search_page.dart';
+import '../pages/Home/home_page.dart';
+import '../pages/Search/search_page.dart';
 
 class CustomNavBar extends StatefulWidget {
-  static String id = "BottomNavbar";
+  static String id = "CustomNavbar";
   const CustomNavBar({super.key});
 
   @override

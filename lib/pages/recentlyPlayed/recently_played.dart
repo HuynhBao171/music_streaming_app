@@ -5,6 +5,7 @@ import 'widgets/repetitious_artist_profile.dart';
 import 'widgets/repetitious_music_cover.dart';
 
 class RecentlyPlayedPage extends StatefulWidget {
+  static String id = "RecentlyPlayed";
   @override
   State<RecentlyPlayedPage> createState() => _RecentlyPlayedPageState();
 }

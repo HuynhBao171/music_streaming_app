@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class RepetitiousListViewVertical extends StatelessWidget {
-  const RepetitiousListViewVertical({Key? key}) : super(key: key);
+  double height;
+  RepetitiousListViewVertical({super.key, required this.height});
 
   @override
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
-    final currentHeight = MediaQuery.of(context).size.height;
     return Container(
       width: currentWidth,
-      height: 240,
+      height: height,
       // color: Colors.red,
       child: ListView.builder(
           itemCount: 10,
