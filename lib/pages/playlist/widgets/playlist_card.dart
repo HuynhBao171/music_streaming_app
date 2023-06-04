@@ -31,59 +31,57 @@ class PlaylistCard extends StatelessWidget {
             child: SizedBox(
               width: width,
               height: height,
-              child: Center(
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 3,
-                      right: 3,
-                      child: Container(
-                        width: 125,
-                        height: 125,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: dominantColor.withOpacity(0.1),
-                          ),
-                          color: dominantColor.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(5),
+              child: Stack(
+                children: [
+                  Positioned(
+                    bottom: 3,
+                    right: 3,
+                    child: Container(
+                      width: 125,
+                      height: 125,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: dominantColor.withOpacity(0.1),
+                        ),
+                        color: dominantColor.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 9,
+                    right: 9,
+                    child: Container(
+                      width: 130,
+                      height: 130,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: dominantColor.withOpacity(0.1),
+                        ),
+                        color: dominantColor,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 15,
+                    right: 16,
+                    child: Container(
+                      width: 135,
+                      height: 135,
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colors.black.withOpacity(0.1)),
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: NetworkImage(playlist.coverUrl.toString()),
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
-                    Positioned(
-                      bottom: 9,
-                      right: 9,
-                      child: Container(
-                        width: 130,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: dominantColor.withOpacity(0.1),
-                          ),
-                          color: dominantColor,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 15,
-                      right: 16,
-                      child: Container(
-                        width: 135,
-                        height: 135,
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Colors.black.withOpacity(0.1)),
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: NetworkImage(playlist.coverUrl.toString()),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
