@@ -8,53 +8,53 @@ class RepetitiousListeningHistory extends StatelessWidget {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       width: currentWidth,
       height: currentHeight / 9,
       
       child: Row(
         children: [
           Container(
-            margin: EdgeInsets.only(left: 6),
+            margin: const EdgeInsets.only(left: 6),
             width: 70,
             height: 70,
             color: Colors.black,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("THE NAME OF MUSIC WITH A BIT INFO"),
-              SizedBox(
+              const Text("THE NAME OF MUSIC WITH A BIT INFO"),
+              const SizedBox(
                 height: 3,
               ),
-              Text(
+              const Text(
                 "NAME OF ARTIST",
                 style: TextStyle(
                     color: Color.fromARGB(255, 134, 134, 134),
                     fontSize: 13.5,
                     fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 3,
               ),
               Row(children: [
-                Icon(
+                const Icon(
                   Icons.play_arrow,
                   color: Color.fromARGB(255, 134, 134, 134),
                   size: 15,
                 ),
                 RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     text: '390K ',
                     style: TextStyle(
                       color: Color.fromARGB(255, 134, 134, 134),
                       fontSize: 13,
                     ),
-                    children: const <TextSpan>[
+                    children: <TextSpan>[
                       TextSpan(
                           text: '•',
                           style: TextStyle(fontWeight: FontWeight.bold)),
@@ -66,7 +66,7 @@ class RepetitiousListeningHistory extends StatelessWidget {
             ],
           ),
           Expanded(child: Container()),
-          Icon(Icons.more_vert,color: Color.fromARGB(255, 134, 134, 134))
+          const Icon(Icons.more_vert,color: Color.fromARGB(255, 134, 134, 134))
         ],
       ),
     );

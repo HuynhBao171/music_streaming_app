@@ -9,10 +9,10 @@ class CustomAppBar extends StatelessWidget {
     return SliverAppBar(
       expandedHeight: 100,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: EdgeInsets.only(left: 20, bottom: 10),
+        titlePadding: const EdgeInsets.only(left: 20, bottom: 10),
         title: Text(
           title,
-          style: TextStyle(fontSize: 27, color: Colors.black),
+          style: const TextStyle(fontSize: 27, color: Colors.black),
         ),
       ),
       backgroundColor: Colors.white,

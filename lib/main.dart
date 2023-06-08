@@ -17,9 +17,9 @@ late bool isLoggedIn;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  // isLoggedIn = await prefs.getBool('loggedIn') ?? false;
-  prefs.setBool("loggedIn", true);
-  prefs.setString("UserEmail", "manduong2k2");
+  isLoggedIn = prefs.getBool('loggedIn') ?? false;
+  // prefs.setBool("loggedIn", false);
+  // prefs.setString("UserEmail", "manduong2k2");
   runApp(const MyApp());
 }
 
@@ -35,18 +35,18 @@ class MyApp extends StatelessWidget {
       initialRoute: CustomNavBar.id,
       // home: const LoginPage(),
       routes: {
-        HomePage.id: (context) => HomePage(),
-        DashboardPage.id: (context) => DashboardPage(),
-        CustomNavBar.id: (context) => CustomNavBar(),
-        LibraryPage.id: (context) => LibraryPage(),
+        HomePage.id: (context) => const HomePage(),
+        DashboardPage.id: (context) => const DashboardPage(),
+        CustomNavBar.id: (context) => const CustomNavBar(),
+        LibraryPage.id: (context) => const LibraryPage(),
         ListeningHistoryPage.id: (context) => ListeningHistoryPage(),
         RegisterPage.id: (context) => RegisterPage(),
-        LoginPage.id: (context) => LoginPage(),
-        ManagerPlaylistPage.id: (context) => ManagerPlaylistPage(),
-        ProfilePage.id: (context) => ProfilePage(),
+        LoginPage.id: (context) => const LoginPage(),
+        ManagerPlaylistPage.id: (context) => const ManagerPlaylistPage(),
+        ProfilePage.id: (context) => const ProfilePage(),
         RecentlyPlayedPage.id: (context) => RecentlyPlayedPage(),
-        SearchPage.id: (context) => SearchPage(),
-        UploadPage.id: (context) => UploadPage(),
+        SearchPage.id: (context) => const SearchPage(),
+        UploadPage.id: (context) => const UploadPage(),
       },
     );
   }

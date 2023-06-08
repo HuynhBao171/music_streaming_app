@@ -7,7 +7,7 @@ class RepetitiousListViewVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
-    return Container(
+    return SizedBox(
       width: currentWidth,
       height: height,
       // color: Colors.red,
@@ -16,53 +16,53 @@ class RepetitiousListViewVertical extends StatelessWidget {
           scrollDirection: Axis.vertical,
           itemBuilder: (ctx, index) {
             return Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               width: currentWidth / 2.5,
 
               // color: Colors.yellow,
               child: Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 6),
+                    margin: const EdgeInsets.only(left: 6),
                     width: 70,
                     height: 70,
                     color: Colors.black,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("THE NAME OF MUSIC WITH A BIT INFO"),
-                      SizedBox(
+                      const Text("THE NAME OF MUSIC WITH A BIT INFO"),
+                      const SizedBox(
                         height: 3,
                       ),
-                      Text(
+                      const Text(
                         "NAME OF ARTIST",
                         style: TextStyle(
                             color: Color.fromARGB(255, 134, 134, 134),
                             fontSize: 13.5,
                             fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 3,
                       ),
                       Row(children: [
-                        Icon(
+                        const Icon(
                           Icons.play_arrow,
                           color: Color.fromARGB(255, 134, 134, 134),
                           size: 15,
                         ),
                         RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                             text: '390K ',
                             style: TextStyle(
                               color: Color.fromARGB(255, 134, 134, 134),
                               fontSize: 13,
                             ),
-                            children: const <TextSpan>[
+                            children: <TextSpan>[
                               TextSpan(
                                   text: '•',
                                   style:
@@ -75,7 +75,7 @@ class RepetitiousListViewVertical extends StatelessWidget {
                     ],
                   ),
                   Expanded(child: Container()),
-                  Icon(Icons.more_vert,
+                  const Icon(Icons.more_vert,
                       color: Color.fromARGB(255, 134, 134, 134))
                 ],
               ),

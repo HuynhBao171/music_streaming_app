@@ -13,7 +13,7 @@ class RepetitiousListViewHorizontal extends StatefulWidget {
 class _RepetitiousListViewHorizontalState
     extends State<RepetitiousListViewHorizontal> {
   Color? _dominantColor;
-  ImageProvider _imageProvider = AssetImage('assets/images/demo.png');
+  final ImageProvider _imageProvider = const AssetImage('assets/images/demo.png');
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _RepetitiousListViewHorizontalState
 
   Future<void> _updateDominantColor() async {
     final dominantColor =
-        await getDominantColor(_imageProvider, Size(135, 135));
+        await getDominantColor(_imageProvider, const Size(135, 135));
     setState(() {
       _dominantColor = dominantColor;
     });
@@ -33,7 +33,7 @@ class _RepetitiousListViewHorizontalState
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       width: currentWidth,
       height: currentHeight / 3.6,
       child: ListView.builder(
@@ -41,11 +41,11 @@ class _RepetitiousListViewHorizontalState
         scrollDirection: Axis.horizontal,
         itemBuilder: (ctx, index) {
           return Container(
-            margin: EdgeInsets.all(5),
+            margin: const EdgeInsets.all(5),
             width: currentWidth / 2.5,
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: currentWidth / 2.5,
                   height: currentHeight / 4.8,
                   child: _dominantColor == null
@@ -120,7 +120,7 @@ class _RepetitiousListViewHorizontalState
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text(
                       'Name of artist • song',
                       style:

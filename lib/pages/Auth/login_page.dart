@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/api_client.dart';
 import '../../widgets/navbar.dart';
@@ -23,32 +22,34 @@ class _LoginPageState extends State<LoginPage> {
 
   // sign user in method
   void LogIn() async {
-    try {
-      final response = await _apiClient.login(emailController.toString(), passwordController.toString());
+  final response = await _apiClient.login(emailController.text, passwordController.text);
 
-      if (response?.statusCode == 200) {
-        // The user was successfully signed up.
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setBool("loggedIn", true);
-        prefs.setString("UserEmail", emailController.toString());
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: ((context) => CustomNavBar())));
+  if (response != null && response.statusCode == 200) {
+    // The user was successfully logged in.
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("loggedIn", true);
+    prefs.setString("UserEmail", emailController.text);
+
+    Navigator.of(context).push(MaterialPageRoute(builder: ((context) => CustomNavBar())));
+  } else {
+    // There was an error logging in the user.
+    var message = 'An error occurred. Please try again later.';
+
+    if (response != null) {
+      if (response.statusCode == 401) {
+        message = 'Invalid email or password.';
       } else {
-        // There was an error signing up the user.
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(response?.data['message']),
-          ),
-        );
+        message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
       }
-    } on DioError catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.response!.data['message']),
-        ),
-      );
     }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
+}
 
 
   @override

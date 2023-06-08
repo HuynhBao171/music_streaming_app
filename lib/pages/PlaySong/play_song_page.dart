@@ -16,34 +16,43 @@ class PlaySongPage extends StatefulWidget {
 class _PlaySongPageState extends State<PlaySongPage> {
   late AudioPlayer _audioPlayer;
   bool _isPlaying = false;
-  Duration _duration = Duration();
-  Duration _position = Duration();
+  Duration _duration = const Duration();
+  Duration _position = const Duration();
+  bool _mounted = false;
 
   void _initAudioPlayer() {
     _audioPlayer = AudioPlayer();
     _audioPlayer.durationStream.listen((duration) {
-      setState(() {
-        _duration = duration ?? Duration();
-      });
+      if (_mounted) { 
+        setState(() {
+          _duration = duration ?? const Duration();
+        });
+      }
     });
     _audioPlayer.positionStream.listen((position) {
-      setState(() {
-        _position = position;
-      });
+      if (_mounted) { 
+        setState(() {
+          _position = position;
+        });
+      }
     });
   }
 
-  @override
+   @override
   void initState() {
     super.initState();
+    _mounted = true; 
     _initAudioPlayer();
     _audioPlayer.setAsset(widget.song.url.toString()).then((value) {
-      setState(() {});
+      if (_mounted) { 
+        setState(() {});
+      }
     });
   }
 
   @override
   void dispose() {
+    _mounted = false; 
     _audioPlayer.dispose();
     super.dispose();
   }
@@ -63,11 +72,11 @@ class _PlaySongPageState extends State<PlaySongPage> {
   }
 
   void _fastForward() {
-    _audioPlayer.seek(_position + Duration(seconds: 10));
+    _audioPlayer.seek(_position + const Duration(seconds: 10));
   }
 
   void _rewind() {
-    _audioPlayer.seek(_position - Duration(seconds: 10));
+    _audioPlayer.seek(_position - const Duration(seconds: 10));
   }
 
   String _formatDuration(Duration duration) {
@@ -89,13 +98,13 @@ class _PlaySongPageState extends State<PlaySongPage> {
           children: <Widget>[
             Text(
               widget.song.name.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
               width: 250,
               height: 250,
@@ -105,7 +114,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -117,8 +126,8 @@ class _PlaySongPageState extends State<PlaySongPage> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            SizedBox(height: 5),
+            const SizedBox(height: 20),
+            const SizedBox(height: 5),
             Slider(
               value: _position.inSeconds.toDouble(),
               min: 0.0,
@@ -129,7 +138,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
                 });
               },
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -137,26 +146,26 @@ class _PlaySongPageState extends State<PlaySongPage> {
                 children: [
                   Text(
                     _formatDuration(_position),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
                   Text(
                     _formatDuration(_duration),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconButton(
                   iconSize: 50,
-                  icon: Icon(Icons.fast_rewind),
+                  icon: const Icon(Icons.fast_rewind),
                   color: Colors.white,
                   onPressed: _rewind,
                 ),
@@ -170,7 +179,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
                 ),
                 IconButton(
                   iconSize: 50,
-                  icon: Icon(Icons.fast_forward),
+                  icon: const Icon(Icons.fast_forward),
                   color: Colors.white,
                   onPressed: _fastForward,
                 ),

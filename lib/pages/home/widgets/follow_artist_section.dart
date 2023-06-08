@@ -38,24 +38,24 @@ class _FollowArtistSectionState extends State<FollowArtistSection> {
         itemCount: followed.length,
         itemBuilder: ((context, index) {
           return Container(
-            margin: EdgeInsets.all(5),
+            margin: const EdgeInsets.all(5),
             width: currentWidth / 2.5,
             
             child: Column(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Color(0xffB1B1B1),
                   backgroundImage: AssetImage("assets/images/profile.png"),
                   radius: 60,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   "Name of artist",
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 followed[index].isFollowed
@@ -66,14 +66,14 @@ class _FollowArtistSectionState extends State<FollowArtistSection> {
                           });
                         },
                       child: AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           width: 90,
                           height: 40,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 221, 221, 221),
+                            color: const Color.fromARGB(255, 221, 221, 221),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               "Following",
                               style: TextStyle(
@@ -90,14 +90,14 @@ class _FollowArtistSectionState extends State<FollowArtistSection> {
                           });
                         },
                         child: AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           width: 90,
                           height: 40,
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               "Follow",
                               style: TextStyle(

@@ -14,7 +14,7 @@ class CustomAppBarDashboard extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           )),
@@ -22,10 +22,10 @@ class CustomAppBarDashboard extends StatelessWidget {
       expandedHeight: 100,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        titlePadding: EdgeInsets.only(bottom: 13, right: 150),
+        titlePadding: const EdgeInsets.only(bottom: 13, right: 150),
         title: Text(
           title,
-          style: TextStyle(fontSize: 25, color: Colors.black),
+          style: const TextStyle(fontSize: 25, color: Colors.black),
         ),
       ),
       backgroundColor: Colors.white,

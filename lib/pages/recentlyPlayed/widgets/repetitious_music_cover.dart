@@ -10,13 +10,13 @@ class RepetitiousMusicCover extends StatelessWidget {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       width: currentWidth,
       height: currentHeight / 9,
       child: Row(
         children: [
           Container(
-            margin: EdgeInsets.only(left: 6),
+            margin: const EdgeInsets.only(left: 6),
             width: 80,
             height: 80,
             child: Stack(children: [
@@ -28,8 +28,8 @@ class RepetitiousMusicCover extends StatelessWidget {
                   height: 60,
                   decoration: BoxDecoration(
                       border:
-                          Border.all(color: Color.fromARGB(255, 134, 134, 134)),
-                      color: Color.fromARGB(255, 200, 200, 200),
+                          Border.all(color: const Color.fromARGB(255, 134, 134, 134)),
+                      color: const Color.fromARGB(255, 200, 200, 200),
                       borderRadius: BorderRadius.circular(5)),
                 ),
               ),
@@ -41,8 +41,8 @@ class RepetitiousMusicCover extends StatelessWidget {
                   height: 65,
                   decoration: BoxDecoration(
                       border:
-                          Border.all(color: Color.fromARGB(255, 134, 134, 134)),
-                      color: Color.fromARGB(255, 200, 200, 200),
+                          Border.all(color: const Color.fromARGB(255, 134, 134, 134)),
+                      color: const Color.fromARGB(255, 200, 200, 200),
                       borderRadius: BorderRadius.circular(5)),
                 ),
               ),
@@ -54,48 +54,48 @@ class RepetitiousMusicCover extends StatelessWidget {
                   height: 70,
                   decoration: BoxDecoration(
                       border:
-                          Border.all(color: Color.fromARGB(255, 134, 134, 134)),
+                          Border.all(color: const Color.fromARGB(255, 134, 134, 134)),
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(5)),
                 ),
               ),
             ]),
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("THE NAME OF MUSIC WITH A BIT INFO"),
-              SizedBox(
+              const Text("THE NAME OF MUSIC WITH A BIT INFO"),
+              const SizedBox(
                 height: 3,
               ),
-              Text(
+              const Text(
                 "NAME OF ARTIST",
                 style: TextStyle(
                     color: Color.fromARGB(255, 134, 134, 134),
                     fontSize: 13.5,
                     fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 3,
               ),
               Row(children: [
-                Icon(
+                const Icon(
                   Icons.favorite,
                   color: Color.fromARGB(255, 134, 134, 134),
                   size: 15,
                 ),
                 RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     text: '869 ',
                     style: TextStyle(
                       color: Color.fromARGB(255, 134, 134, 134),
                       fontSize: 13,
                     ),
-                    children: const <TextSpan>[
+                    children: <TextSpan>[
                       TextSpan(
                           text: '•',
                           style: TextStyle(fontWeight: FontWeight.bold)),
@@ -103,7 +103,7 @@ class RepetitiousMusicCover extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 privateIcon ?? Container(),
@@ -111,7 +111,7 @@ class RepetitiousMusicCover extends StatelessWidget {
             ],
           ),
           Expanded(child: Container()),
-          Icon(Icons.more_vert, color: Color.fromARGB(255, 134, 134, 134))
+          const Icon(Icons.more_vert, color: Color.fromARGB(255, 134, 134, 134))
         ],
       ),
     );

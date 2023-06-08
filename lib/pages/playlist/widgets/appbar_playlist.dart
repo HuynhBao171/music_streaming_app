@@ -13,7 +13,7 @@ class CustomAppBarPlaylist extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           )),
@@ -23,7 +23,7 @@ class CustomAppBarPlaylist extends StatelessWidget {
         centerTitle: true,
         title: Text(
           title,
-          style: TextStyle(fontSize: 27, color: Colors.black),
+          style: const TextStyle(fontSize: 27, color: Colors.black),
         ),
       ),
       backgroundColor: Colors.transparent,

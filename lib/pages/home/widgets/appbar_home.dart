@@ -14,7 +14,7 @@ class CustomAppBarHome extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       expandedHeight: 100,
-      flexibleSpace: FlexibleSpaceBar(
+      flexibleSpace: const FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(left: 20, bottom: 10),
         title: Text(
           "Home",
@@ -29,7 +29,7 @@ class CustomAppBarHome extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => UploadPage())));
+                      MaterialPageRoute(builder: ((context) => const UploadPage())));
                 },
           child: const Icon(
             LineIcons.alternateArrowCircleUpAlt,
@@ -38,8 +38,8 @@ class CustomAppBarHome extends StatelessWidget {
           ),
         ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 10),
+        const Padding(
+          padding: EdgeInsets.only(right: 10),
           child: Icon(LineIcons.bell, color: Colors.grey, size: 35),
         ),
       ],

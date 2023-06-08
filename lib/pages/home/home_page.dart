@@ -4,9 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:music_streaming_app/pages/Home/widgets/follow_artist_section.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../model/playlist.dart';
 import '../../model/song.dart';
-import '../../widgets/playlist_listview_horizontal.dart';
 import '../../widgets/repetitious_double_text.dart';
 import '../../widgets/repetitious_listview_horizontal.dart';
 import '../../widgets/repetitious_text.dart';
@@ -37,9 +35,9 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: NestedScrollView(
             headerSliverBuilder: (ctx, i) => [
-                  CustomAppBarHome(),
+                  const CustomAppBarHome(),
                 ],
-            body: MainBody()),
+            body: const MainBody()),
       ),
     );
   }
@@ -57,72 +55,77 @@ class MainBody extends StatelessWidget {
         ReapetedDoubleText(
             title: "More of what you like",
             subtitle: "Suggestions based on what you\'ve liked or played"),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
-        PlaylistListViewHorizontal(playlists: Playlist.dailyMix,),
-        SizedBox(
+        // PlaylistListViewHorizontal(playlists: Playlist.dailyMix,),
+        const RepetitiousListViewHorizontal(),
+        const SizedBox(
           height: 10,
         ),
         RepetitiousText("Recently Played"),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
-        PlaylistListViewHorizontal(playlists: Playlist.album,),
-        SizedBox(
+        // PlaylistListViewHorizontal(playlists: Playlist.album,),
+        const RepetitiousListViewHorizontal(),
+        const SizedBox(
           height: 10,
         ),
         ReapetedDoubleText(
             title: "The Upload", subtitle: "Newly posted tracks. Just for you"),
-        UploadSectionWidget(),
-        BelowUploadSectionWidet(),
-        SizedBox(
+        const UploadSectionWidget(),
+        const BelowUploadSectionWidet(),
+        const SizedBox(
           height: 10,
         ),
         ReapetedDoubleText(
             title: "Artist You Should Follow",
             subtitle: "Based on your listening history"),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
-        FollowArtistSection(),
-        SizedBox(
+        const FollowArtistSection(),
+        const SizedBox(
           height: 5,
         ),
         ReapetedDoubleText(
             title: "Party",
             subtitle: "Popular playlists from the App community"),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        RepetitiousListViewHorizontal(),
-        SizedBox(
+        const RepetitiousListViewHorizontal(),
+        const SizedBox(
           height: 5,
         ),
         ReapetedDoubleText(
             title: "Sleep",
             subtitle: "Popular playlists from the App community"),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        RepetitiousListViewHorizontal(),
-        SizedBox(
+        const RepetitiousListViewHorizontal(),
+        const SizedBox(
           height: 5,
         ),
         ReapetedDoubleText(
             title: "Chill",
             subtitle: "Popular playlists from the App community"),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        RepetitiousListViewHorizontal(),
-        SizedBox(
+        const RepetitiousListViewHorizontal(),
+        const SizedBox(
           height: 5,
         ),
         ReapetedDoubleText(
             title: "Charts: New & hot",
             subtitle: "Up-and-coming tracks on App"),
-        UploadSectionWidget(),
+        const UploadSectionWidget(),
+        const SizedBox(
+          height: 60,
+        ),
       ],
     );
   }

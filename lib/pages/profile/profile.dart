@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../model/playlist.dart';
 import '../../widgets/playlist_listview_horizontal.dart';
-import '../../widgets/repetitious_listview_horizontal.dart';
 import '../../widgets/repetitious_listview_vertical.dart';
 import '../../widgets/repetitious_text.dart';
-import '../ListeningHistory/widgets/repetitious_listening_history.dart';
 import '../ListeningHistory/listening_history.dart';
 import 'widgets/appbar_profile.dart';
 
@@ -27,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
             headerSliverBuilder: (ctx, i) => [
                   CustomAppBarProfile(title: "Profile"),
                 ],
-            body: MainBodyProfile()),
+            body: const MainBodyProfile()),
       ),
     );
   }
@@ -51,17 +49,17 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-           CircleAvatar(
+           const CircleAvatar(
             backgroundColor: Color(0xffB1B1B1),
             backgroundImage: AssetImage('assets/images/demo.png'),
             radius: 60,
           ), 
-          SizedBox(height:10),
+          const SizedBox(height:10),
           const Text(
             "Userdemo",
             style: TextStyle(fontSize: 27, color: Colors.black),
           ),
-          SizedBox(height:10),
+          const SizedBox(height:10),
           Container(
             height:20,
             child: Row(
@@ -82,7 +80,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
               ],
             ),
           ),
-          SizedBox(height:15),
+          const SizedBox(height:15),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
@@ -94,7 +92,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => ListeningHistoryPage())));
+                            builder: ((context) => const ListeningHistoryPage())));
                       },
                       child: const Text(
                         "See All",
@@ -107,7 +105,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
               ),
             ),
             RepetitiousListViewVertical(height: 240,),
-            SizedBox(height:15),
+            const SizedBox(height:15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
@@ -119,7 +117,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => ListeningHistoryPage())));
+                            builder: ((context) => const ListeningHistoryPage())));
                       },
                       child: const Text(
                         "See All",
@@ -131,7 +129,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             PlaylistListViewHorizontal(playlists: Playlist.album,),

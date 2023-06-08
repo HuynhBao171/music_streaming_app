@@ -1,6 +1,5 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../pages/Library/library_page.dart';
 import '../pages/Home/home_page.dart';
@@ -25,84 +24,88 @@ class _CustomNavBarState extends State<CustomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    bool showNav = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
         children: screens,
       ),
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        // color: Colors.black.withOpacity(0.8),
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.8),
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
-          boxShadow: [
-            BoxShadow(
-              spreadRadius: -10,
-              blurRadius: 60,
-              color: Colors.black.withOpacity(0.4),
-              offset: const Offset(0, 25),
-            )
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 2),
-          // child: GNav(
-          //   color: Colors.white,
-          //   rippleColor: Colors.orange,
-          //   activeColor: Colors.orange,
-          //   hoverColor: Colors.orange,
-          // //  tabBackgroundColor: Colors.grey,
-          //   gap: 30,
-          //   padding: const EdgeInsets.all(14),
-          //   tabs: const [
-          //     GButton(
-          //       icon: Icons.home,
-          //       text: 'Home',
-          //     ),
-          //     GButton(
-          //       icon: Icons.search,
-          //       text: 'Search',
-          //     ),
-          //     GButton(
-          //       icon: Icons.library_books,
-          //       text: 'Library',
-          //     ),
-          //   ],
-          //   selectedIndex: _selectedIndex,
-          //     onTabChange: (index) {
-          //       setState(() {
-          //         _selectedIndex = index;
-          //       });
-          //     }
-          // ),
-          child: CustomNavigationBar(
-            iconSize: 24.0,
-            selectedColor: Colors.orange,
-            strokeColor: Colors.orange,
-            unSelectedColor: Colors.grey,
-            backgroundColor: Colors.transparent,
-            items: [
-              CustomNavigationBarItem(
-                icon: const Icon(Icons.home),
-                title: const Text("Home", style: TextStyle(color: Colors.white),),
-              ),
-              CustomNavigationBarItem(
-                icon: const Icon(Icons.search),
-                title: const Text("Search", style: TextStyle(color: Colors.white),),
-              ),
-              CustomNavigationBarItem(
-                icon: const Icon(Icons.library_books),
-                title: const Text("Library", style: TextStyle(color: Colors.white),),
-              ),
+      floatingActionButton: Visibility(
+        visible: !showNav,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.8),
+            borderRadius: const BorderRadius.all(Radius.circular(100)),
+            boxShadow: [
+              BoxShadow(
+                spreadRadius: -10,
+                blurRadius: 60,
+                color: Colors.black.withOpacity(0.4),
+                offset: const Offset(0, 25),
+              )
             ],
-            currentIndex: _selectedIndex,
-            onTap: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 2),
+            // child: GNav(
+            //   color: Colors.white,
+            //   rippleColor: Colors.orange,
+            //   activeColor: Colors.orange,
+            //   hoverColor: Colors.orange,
+            // //  tabBackgroundColor: Colors.grey,
+            //   gap: 30,
+            //   padding: const EdgeInsets.all(14),
+            //   tabs: const [
+            //     GButton(
+            //       icon: Icons.home,
+            //       text: 'Home',
+            //     ),
+            //     GButton(
+            //       icon: Icons.search,
+            //       text: 'Search',
+            //     ),
+            //     GButton(
+            //       icon: Icons.library_books,
+            //       text: 'Library',
+            //     ),
+            //   ],
+            //   selectedIndex: _selectedIndex,
+            //     onTabChange: (index) {
+            //       setState(() {
+            //         _selectedIndex = index;
+            //       });
+            //     }
+            // ),
+            child: CustomNavigationBar(
+              iconSize: 24.0,
+              selectedColor: Colors.orange,
+              strokeColor: Colors.orange,
+              unSelectedColor: Colors.grey,
+              backgroundColor: Colors.transparent,
+              items: [
+                CustomNavigationBarItem(
+                  icon: const Icon(Icons.home),
+                  title: const Text("Home", style: TextStyle(color: Colors.white),),
+                ),
+                CustomNavigationBarItem(
+                  icon: const Icon(Icons.search),
+                  title: const Text("Search", style: TextStyle(color: Colors.white),),
+                ),
+                CustomNavigationBarItem(
+                  icon: const Icon(Icons.library_books),
+                  title: const Text("Library", style: TextStyle(color: Colors.white),),
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              onTap: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+            ),
           ),
         ),
       ),

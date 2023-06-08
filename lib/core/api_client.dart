@@ -1,57 +1,52 @@
-import 'dart:async';
-
-import 'package:dio/dio.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import '../config/env/endpoint.dart';
 
 class ApiClient {
-  final Dio _dio = Dio();
-
-  Future<Response?> signup(String username,String email, String password) async {
+  Future<http.Response?> signup(String username, String email, String password) async {
     try {
-      Response response = await _dio.post(
-        '/api/v1/users',
-        data: {
+      final response = await http.post(
+        Uri.parse('https://manduong2k2.bsite.net/api/Accounts/register'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
           'Id': username,
-          'email': email,
-          'password': password,
+          'Email': email,
+          'Password': password,
+        }),
+      );
+      return response;
+    } catch (e) {
+      print('Error in signup: $e');
+      return null;
+    }
+  }
+
+  Future<http.Response?> login(String email, String password) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${Endpoint.music}/Accounts/login/$email&$password'),
+      );
+      return response;
+    } catch (e) {
+      print('Error in login: $e');
+      return null;
+    }
+  }
+
+  Future<http.Response?> getUserProfileData(String accessToken) async {
+    try {
+      final response = await http.get(
+        Uri.parse('https://api.loginradius.com/identity/v2/auth/account'),
+        headers: <String, String>{
+          'Authorization': 'Bearer $accessToken',
         },
       );
-
       return response;
-    } on DioError catch (e) {
-      return e.response;
+    } catch (e) {
+      print('Error in getUserProfileData: $e');
+      return null;
     }
   }
-
-  Future<Response?> login(String username, String password) async {
-    try {
-      // Response response = await _dio.post(
-      //   '${Endpoint.music}/Accounts/login/$username&$password',
-      // );
-      Response response = await _dio.post(
-        'https://manduong2k2.bsite.net/api/Accounts/login/$username&$password',
-      );
-
-      return response;
-    } on DioError catch (e) {
-      return e.response;
-    }
-  }
-
-  Future<Response?> getUserProfileData(String accesstoken) async {
-        try {
-          Response response = await _dio.get(
-            'https://api.loginradius.com/identity/v2/auth/account',
-            // options: Options(
-            //   headers: {
-            //     'Authorization': 'Bearer ${YOUR_ACCESS_TOKEN}',
-            //   },
-            // ),
-          );
-          return response.data;
-        } on DioError catch (e) {
-          return e.response;
-        }
-    }
 }

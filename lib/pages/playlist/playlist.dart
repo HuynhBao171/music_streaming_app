@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../model/playlist.dart';
-import '../../widgets/repetitious_listview_horizontal.dart';
 import '../../widgets/song_listview_vertical.dart';
 import '../../widgets/repetitious_text.dart';
 import 'widgets/appbar_playlist.dart';
@@ -10,7 +9,7 @@ class PlaylistPage extends StatelessWidget {
   static String id = "PlaylistPage";
   final Playlist playlist;
   final Color dominantColor;
-  PlaylistPage(
+  const PlaylistPage(
       {super.key, required this.playlist, required this.dominantColor});
 
   @override
@@ -44,7 +43,7 @@ class PlaylistPage extends StatelessWidget {
 
 class MainBodyProfile extends StatefulWidget {
   final Playlist playlist;
-  MainBodyProfile({super.key, required this.playlist});
+  const MainBodyProfile({super.key, required this.playlist});
 
   @override
   State<MainBodyProfile> createState() => _MainBodyProfileState();
@@ -55,13 +54,13 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       width: currentWidth,
       height: currentHeight,
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
@@ -70,7 +69,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
                     color: Colors.grey.withOpacity(0.5), 
                     spreadRadius: 2, 
                     blurRadius: 5, 
-                    offset: Offset(0, 3), 
+                    offset: const Offset(0, 3), 
                   ),
                 ],
               ),
@@ -84,7 +83,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
                 ),
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
@@ -95,7 +94,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
               ),
             ),
             SongListViewVertical(
-              height: currentHeight, songs: widget.playlist.songs,
+              height: currentHeight, songs: widget.playlist.songs, playlist: widget.playlist,
             ),
           ],
         ),

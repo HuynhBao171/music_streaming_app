@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 import '../model/playlist.dart';
-import '../model/song.dart';
 import '../utils/color_utils.dart';
 import '../pages/Playlist/widgets/playlist_card.dart';
 
@@ -13,9 +10,9 @@ class PlaylistListViewHorizontal extends StatelessWidget {
 
   Color? _dominantColor;
 
-  Future<Color> _updateDominantColor(ImageProvider _imageProvider) async {
+  Future<Color> _updateDominantColor(ImageProvider imageProvider) async {
     final dominantColor =
-        await getDominantColor(_imageProvider, Size(135, 135));
+        await getDominantColor(imageProvider, const Size(135, 135));
     return dominantColor;
   }
 
@@ -23,7 +20,7 @@ class PlaylistListViewHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       width: currentWidth,
       height: currentHeight / 3.6,
       child: ListView.builder(
@@ -43,11 +40,11 @@ class PlaylistListViewHorizontal extends StatelessWidget {
                 );
               } else {
                 return Container(
-                  margin: EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(5),
                   width: currentWidth / 2.5,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         width: currentWidth / 2.5,
                         height: currentHeight / 4.8,
                         child: Center(

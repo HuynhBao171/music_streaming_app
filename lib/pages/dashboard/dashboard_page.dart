@@ -24,7 +24,7 @@ class _DashboardPageState extends State<DashboardPage> {
             headerSliverBuilder: (ctx, i) => [
                   CustomAppBarDashboard(title: "Dashboard"),
                 ],
-            body: MainBodyDashboard()),
+            body: const MainBodyDashboard()),
       ),
     );
   }
@@ -48,20 +48,19 @@ class _MainBodyDashboardState extends State<MainBodyDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
     return SafeArea(
-        child: Container(
+        child: SizedBox(
       height: currentHeight,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 180),
-          CircleAvatar(
+          const SizedBox(height: 180),
+          const CircleAvatar(
             radius: 70,
             backgroundImage: AssetImage('assets/images/demo.png')
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           FutureBuilder(
             future: getDetails(),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -76,7 +75,7 @@ class _MainBodyDashboardState extends State<MainBodyDashboard> {
               );
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           MyButton(

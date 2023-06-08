@@ -5,7 +5,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../Auth/widgets/my_textfield.dart';
 import 'widgets/appbar_upload.dart';
 
 class UploadPage extends StatefulWidget {
@@ -19,6 +18,7 @@ class UploadPage extends StatefulWidget {
 class _UploadPageState extends State<UploadPage> {
   @override
   Widget build(BuildContext context) {
+    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -26,9 +26,35 @@ class _UploadPageState extends State<UploadPage> {
             headerSliverBuilder: (ctx, i) => [
                   CustomAppBarUpload(title: "Upload"),
                 ],
-            body: MainBodyUpload()),
+            body: const MainBodyUpload()),
+      ),
+      floatingActionButton: Visibility(
+        visible: !showFab,
+        child: FloatingActionButton.extended(
+          elevation: 20,
+          onPressed: () async {
+            await _uploadAudio();
+          },
+          highlightElevation: 5,
+          splashColor: Colors.orange,
+          foregroundColor: Colors.orange,
+          backgroundColor: Colors.white,
+          icon: const Icon(Icons.upload),
+          label: const Text('Upload'),
+        ),
       ),
     );
+  }
+
+  Future<void> _uploadAudio() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.audio,
+      allowMultiple: false,
+    );
+    if (result == null || result.files.isEmpty) {
+      return;
+    }
+    setState(() {});
   }
 }
 
@@ -42,7 +68,20 @@ class MainBodyUpload extends StatefulWidget {
 class _MainBodyUploadState extends State<MainBodyUpload>
     with TickerProviderStateMixin {
   File? _image;
+  String? _songName;
   AnimationController? controller;
+  String? _selectedGenre;
+  final songController = TextEditingController();
+  final describeController = TextEditingController();
+
+  final List<String> _genres = [
+    'Pop',
+    'Rock',
+    'Jazz',
+    'Blues',
+    'R&B/Soul',
+    'Hip hop',
+  ];
 
   @override
   initState() {
@@ -61,12 +100,8 @@ class _MainBodyUploadState extends State<MainBodyUpload>
 
   @override
   Widget build(BuildContext context) {
-    final currentWidth = MediaQuery.of(context).size.width;
-    final currentHeight = MediaQuery.of(context).size.height;
-    return Container(
-      width: currentWidth,
-      height: currentHeight,
-      child: Center(
+    return Expanded(
+      child: SingleChildScrollView(
         child: Column(
           children: [
             GestureDetector(
@@ -78,23 +113,113 @@ class _MainBodyUploadState extends State<MainBodyUpload>
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.grey,
+                  border: Border.all(color: Colors.black.withOpacity(0.1)),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
                   child: _image != null
-                      ? Image.file(
-                          _image!,
-                          width: 150,
-                          height: 150,
-                          fit: BoxFit.cover,
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.file(
+                            _image!,
+                            width: 150,
+                            height: 150,
+                            fit: BoxFit.cover,
+                          ),
                         )
-                      : Icon(LineIcons.camera),
+                      : const Icon(LineIcons.camera),
                 ),
               ),
             ),
-            MyTextField(
-              labelText: 'Username',
-              obscureText: false,
-              controller: null,
+            const SizedBox(height: 20),
+            SizedBox(
+              child: DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey.shade200,
+                  labelText: 'Genre',
+                  labelStyle: TextStyle(color: Colors.grey[500]),
+                ),
+                value: _selectedGenre,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedGenre = value;
+                  });
+                },
+                items: _genres.map((genre) {
+                  return DropdownMenuItem(
+                    value: genre,
+                    child: Text(genre),
+                  );
+                }).toList(),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: Center(
+                    child: _songName != null
+                        ? TextField(
+                            controller: songController,
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey.shade400),
+                              ),
+                              fillColor: Colors.grey.shade200,
+                              filled: true,
+                              labelText: 'Song name',
+                              labelStyle: TextStyle(color: Colors.grey[500]),
+                            ),
+                          )
+                        : TextField(
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey.shade400),
+                              ),
+                              fillColor: Colors.grey.shade200,
+                              filled: true,
+                              labelText: "Choose the song",
+                              labelStyle: TextStyle(color: Colors.grey[500]),
+                            ),
+                          ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                    onPressed: () async {
+                      await _selectAudio();
+                    },
+                    icon: const Icon(LineIcons.music),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: describeController,
+              decoration: InputDecoration(
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey.shade400),
+                ),
+                fillColor: Colors.grey.shade200,
+                filled: true,
+                labelText: "Describe your track",
+                labelStyle: TextStyle(color: Colors.grey[500]),
+              ),
             ),
           ],
         ),
@@ -102,8 +227,21 @@ class _MainBodyUploadState extends State<MainBodyUpload>
     );
   }
 
+  Future<void> _selectAudio() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.audio,
+      allowMultiple: false,
+    );
+    if (result == null || result.files.isEmpty) {
+      return;
+    }
+    setState(() {
+      _songName = result.files.single.name;
+      songController.text = _songName ?? '';
+    });
+  }
+
   Future<void> _selectImage() async {
-    // Show a bottom sheet
     showModalBottomSheet(
       context: context,
       transitionAnimationController: controller,
@@ -119,37 +257,28 @@ class _MainBodyUploadState extends State<MainBodyUpload>
                 var image =
                     await ImagePicker().pickImage(source: ImageSource.gallery);
 
-                // If the user didn't pick an image, return
                 if (image == null) {
                   return;
                 }
 
-                // Set the image as the state
                 setState(() {
                   _image = File(image.path);
                 });
 
-                // Close the bottom sheet
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Take a Photo'),
+              title: const Text('Take a Photo'),
               onTap: () async {
                 var image =
                     await ImagePicker().pickImage(source: ImageSource.camera);
-
-                // If the user didn't pick an image, return
                 if (image == null) {
                   return;
                 }
-
-                // Set the image as the state
                 setState(() {
                   _image = File(image.path);
                 });
-
-                // Close the bottom sheet
                 Navigator.pop(context);
               },
             ),

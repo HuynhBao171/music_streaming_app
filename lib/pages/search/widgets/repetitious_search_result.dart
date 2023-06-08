@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 class RepetitiousSearchResult extends StatelessWidget {
-  const RepetitiousSearchResult({
-    Key? key,
-  }) : super(key: key);
+  String searchResult;
+  RepetitiousSearchResult({super.key, required this.searchResult,});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15,vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Name of Music or Artist",
+            searchResult,
             style: TextStyle(
-                fontSize: 17, color: Color.fromARGB(255, 136, 136, 136), fontWeight: FontWeight.w500),
+                fontSize: 17, color: Colors.grey.shade600, fontWeight: FontWeight.w500),
           ),
-          Icon(LineIcons.trash, color: Color.fromARGB(255, 136, 136, 136)),
+          Icon(LineIcons.trash, color: Colors.grey.shade600),
 
         ],
       ),

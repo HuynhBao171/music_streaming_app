@@ -5,7 +5,7 @@ import 'package:line_icons/line_icons.dart';
 // ignore: must_be_immutable
 class CustomAppBarRecentlyPlayed extends StatelessWidget {
   VoidCallback trashing;
-  CustomAppBarRecentlyPlayed(this.trashing);
+  CustomAppBarRecentlyPlayed(this.trashing, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +14,13 @@ class CustomAppBarRecentlyPlayed extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           )),
       pinned: true,
       expandedHeight: 100,
-      flexibleSpace: FlexibleSpaceBar(
+      flexibleSpace: const FlexibleSpaceBar(
         centerTitle: true,
         titlePadding: EdgeInsets.only(bottom: 13, right: 90),
         title: Text(
@@ -67,18 +67,18 @@ class CustomAppBarRecentlyPlayed extends StatelessWidget {
                             Navigator.pop(context);
                           }),
                       TextButton(
+                          onPressed: trashing,
                           child: const Text(
                             'CLEAR',
                             style: TextStyle(
                                 color: Color.fromARGB(255, 223, 141, 19)),
-                          ),
-                          onPressed: trashing),
+                          )),
                     ],
                   );
                 },
               );
             },
-            child: Icon(
+            child: const Icon(
               LineIcons.trash,
               color: Colors.grey,
               size: 35,

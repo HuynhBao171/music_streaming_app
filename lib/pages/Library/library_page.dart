@@ -22,9 +22,9 @@ class LibraryPage extends StatelessWidget {
       body: SafeArea(
         child: NestedScrollView(
             headerSliverBuilder: (ctx, i) => [
-                  CustomAppBarLibrary(),
+                  const CustomAppBarLibrary(),
                 ],
-            body: MainBodyLibrary()),
+            body: const MainBodyLibrary()),
       ),
     );
   }
@@ -37,7 +37,7 @@ class MainBodyLibrary extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       width: currentWidth,
       height: currentHeight,
       child: SingleChildScrollView(
@@ -47,27 +47,27 @@ class MainBodyLibrary extends StatelessWidget {
             InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => ProfilePage())));
+                      MaterialPageRoute(builder: ((context) => const ProfilePage())));
                 },
-                child: ActivityCard(title: "Profile", icon: Icons.people)),
+                child: const ActivityCard(title: "Profile", icon: Icons.people)),
             Divider(
               color: Colors.grey.shade800,
             ),
-            ActivityCard(title:"Liked tracks", icon: Icons.favorite),
+            const ActivityCard(title:"Liked tracks", icon: Icons.favorite),
             Divider(
               color: Colors.grey.shade800,
             ),
             InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => ManagerPlaylistPage())));
+                      MaterialPageRoute(builder: ((context) => const ManagerPlaylistPage())));
                 },
-                child: ActivityCard(title:"Playlists", icon: Icons.album)),
+                child: const ActivityCard(title:"Playlists", icon: Icons.album)),
             Divider(
               color: Colors.grey.shade800,
             ),
-            ActivityCard(title: "Following", icon: Icons.lightbulb),
-            SizedBox(
+            const ActivityCard(title: "Following", icon: Icons.lightbulb),
+            const SizedBox(
               height: 15,
             ),
             Padding(
@@ -83,7 +83,7 @@ class MainBodyLibrary extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => RecentlyPlayedPage())));
                       },
-                      child: Text(
+                      child: const Text(
                         "See All",
                         style: TextStyle(
                             color: Color.fromARGB(255, 134, 134, 134)),
@@ -93,11 +93,11 @@ class MainBodyLibrary extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             PlaylistListViewHorizontal(playlists: Playlist.album,),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Padding(
@@ -113,7 +113,7 @@ class MainBodyLibrary extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => ListeningHistoryPage())));
                       },
-                      child: Text(
+                      child: const Text(
                         "See All",
                         style: TextStyle(
                             color: Color.fromARGB(255, 134, 134, 134)),

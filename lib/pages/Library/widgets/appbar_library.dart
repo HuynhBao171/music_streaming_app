@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../Dashboard/dashboard_page.dart';
-import '../../Profile/profile.dart';
 
 class CustomAppBarLibrary extends StatelessWidget {
   const CustomAppBarLibrary({
@@ -13,7 +12,7 @@ class CustomAppBarLibrary extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       expandedHeight: 100,
-      flexibleSpace: FlexibleSpaceBar(
+      flexibleSpace: const FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(left: 15, bottom: 10),
         title: Text(
           "Library",
@@ -28,9 +27,9 @@ class CustomAppBarLibrary extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => DashboardPage())));
+                    MaterialPageRoute(builder: ((context) => const DashboardPage())));
               },
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 radius: 30,
                 backgroundImage: AssetImage('assets/images/demo.png'),
               ),

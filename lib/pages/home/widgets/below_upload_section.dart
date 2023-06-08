@@ -7,14 +7,14 @@ class BelowUploadSectionWidet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 5,left: 10),
+      margin: const EdgeInsets.only(top: 5,left: 10),
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             backgroundColor : Colors.black ,
           ),
-          SizedBox(width: 10,),
-          Text("Based on your listening history", style: TextStyle(
+          const SizedBox(width: 10,),
+          const Text("Based on your listening history", style: TextStyle(
                 fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
           ),
         ],

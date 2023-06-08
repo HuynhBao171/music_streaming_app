@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/appbar.dart';
 import 'widgets/repetitious_search_result.dart';
+import 'widgets/search_input_field.dart';
 
 class SearchPage extends StatelessWidget {
   static String id = "Search";
@@ -13,11 +14,14 @@ class SearchPage extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: SafeArea(
             child: NestedScrollView(
                 headerSliverBuilder: (ctx, i) => [
-                      CustomAppBar(title: "Search",),
+                      CustomAppBar(
+                        title: "Search",
+                      ),
                     ],
                 body: const MainBodySearch())),
       ),
@@ -33,109 +37,114 @@ class MainBodySearch extends StatefulWidget {
 }
 
 class _MainBodySearchState extends State<MainBodySearch> {
-  bool showenResult = true;
+  TextEditingController myController = TextEditingController();
+  bool showResults = true;
+  List<String> recentSearches = [];
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: EdgeInsets.all(10),
-          child: TextField(
-            onChanged: (val) {},
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Color.fromARGB(255, 228, 228, 228),
-                contentPadding: EdgeInsets.all(10),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Color.fromARGB(255, 146, 146, 146),
-                ),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none),
-                hintText: "Search",
-                hintStyle: TextStyle(
-                    fontSize: 14, color: Color.fromARGB(255, 131, 131, 131))),
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        showenResult
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    Container(
+      margin: const EdgeInsets.all(10),
+      child: SearchInputField(
+        myController: myController,
+        hintText: "What do you want to listen to?",
+        borderRadius: 5,
+        onSubmitted: (query) {
+          if (query != null) {
+            setState(() {
+              recentSearches.add(query);
+              showResults = false;
+            });
+            //searchYoutube(query);
+          }
+        },
+      ),
+    ),
+    const SizedBox(
+      height: 10,
+    ),
+    showResults
+        ? Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 120),
+              child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Text(
-                      "History",
+                  FadeInDown(
+                    delay: const Duration(microseconds: 300),
+                    from: -30,
+                    child: const Text(
+                      "Search",
                       style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w500, fontSize: 20),
                     ),
                   ),
-                  RepetitiousSearchResult(),
-                  RepetitiousSearchResult(),
-                  RepetitiousSearchResult(),
-                  RepetitiousSearchResult(),
-                  SizedBox(
-                    height: 10,
+                  const SizedBox(
+                    height: 5,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          showenResult = false;
-                        });
-                      },
-                      child: Text(
-                        "Clear search history",
-                        style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w400),
-                      ),
+                  FadeInDown(
+                    delay: const Duration(microseconds: 600),
+                    from: -60,
+                    child: const Text(
+                      "Find artists, tracks, albums and playlists.",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          color: Colors.grey),
                     ),
-                  ),
+                  )
                 ],
-              )
-            : Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 120),
-                  child: Column(
-                    children: [
-                      FadeInDown(
-                        delay: Duration(microseconds: 300),
-                        from: -30,
-                        child: Text(
-                          "Search",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 20),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      FadeInDown(
-                        delay: Duration(microseconds: 600),
-                        from: -60,
-                        child: Text(
-                          "Find artists, tracks, albums and playlists.",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15,
-                              color: Colors.grey),
-                        ),
-                      )
-                    ],
+              ),
+            ),
+          )
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 15),
+                child: Text(
+                  "History",
+                  style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+              ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: recentSearches.length,
+                  itemBuilder: (context, index) {
+                    RepetitiousSearchResult(
+                      searchResult: recentSearches[index],
+                    );
+                    return null;
+                  }),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      showResults = true;
+                    });
+                  },
+                  child: const Text(
+                    "Clear search history",
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w400),
                   ),
                 ),
-              )
+              ),
+            ],
+          )
       ],
-    ));
+    );
   }
 }

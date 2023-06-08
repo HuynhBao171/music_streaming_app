@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:line_icons/line_icons.dart';
-
 // ignore: must_be_immutable
 class CustomAppBarProfile extends StatelessWidget {
   String title;
@@ -14,7 +12,7 @@ class CustomAppBarProfile extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           )),
@@ -22,10 +20,10 @@ class CustomAppBarProfile extends StatelessWidget {
       expandedHeight: 100,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        titlePadding: EdgeInsets.only(bottom: 13, right: 220),
+        titlePadding: const EdgeInsets.only(bottom: 13, right: 220),
         title: Text(
           title,
-          style: TextStyle(fontSize: 25, color: Colors.black),
+          style: const TextStyle(fontSize: 25, color: Colors.black),
         ),
       ),
       backgroundColor: Colors.white,

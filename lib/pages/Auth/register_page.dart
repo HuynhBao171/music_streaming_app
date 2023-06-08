@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 import '../../core/api_client.dart';
-import '../../widgets/navbar.dart';
 import 'login_page.dart';
 import 'widgets/my_button.dart';
 import 'widgets/my_textfield.dart';
@@ -22,30 +20,27 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() async {
-    try {
-      final response = await _apiClient.signup(usernameController.toString(),emailController.toString(), passwordController.toString());
+  void signIn() async {
+  final response = await _apiClient.signup(usernameController.text, emailController.text, passwordController.text);
 
-      if (response?.statusCode == 200) {
-        // The user was successfully signed up.
-        Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => CustomNavBar())));
-      } else {
-        // There was an error signing up the user.
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(response?.data['message']),
-          ),
-        );
-      }
-    } on DioError catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.response!.data['message']),
-        ),
-      );
+  if (response != null && response.statusCode == 200) {
+    // The user was successfully signed up.
+    Navigator.of(context).push(MaterialPageRoute(builder: ((context) => LoginPage())));
+  } else {
+    // There was an error signing up the user.
+    var message = 'An error occurred. Please try again later.';
+
+    if (response != null) {
+      message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
     }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
               MyButton(
                 text: "Sign up",
                 onTap: (){
-                      signUserIn();
+                      signIn();
                     },
               ),
               const SizedBox(height: 50),

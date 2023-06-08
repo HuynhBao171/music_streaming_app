@@ -19,8 +19,8 @@ class UploadSectionWidget extends StatelessWidget {
               width: 345,
               height: 330,
               decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromARGB(255, 134, 134, 134)),
-                  color: Color.fromARGB(255, 200, 200, 200),
+                  border: Border.all(color: const Color.fromARGB(255, 134, 134, 134)),
+                  color: const Color.fromARGB(255, 200, 200, 200),
                   borderRadius: BorderRadius.circular(5)),
             ),
           ),
@@ -31,8 +31,8 @@ class UploadSectionWidget extends StatelessWidget {
               width: 355,
               height: 335,
               decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromARGB(255, 134, 134, 134)),
-                  color: Color.fromARGB(255, 200, 200, 200),
+                  border: Border.all(color: const Color.fromARGB(255, 134, 134, 134)),
+                  color: const Color.fromARGB(255, 200, 200, 200),
                   borderRadius: BorderRadius.circular(5)),
             ),
           ),
@@ -49,16 +49,16 @@ class UploadSectionWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    margin: EdgeInsets.all(12),
+                    margin: const EdgeInsets.all(12),
                     width: 130,
                     height: 40,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(153, 32, 32, 32)),
-                        color: Color.fromARGB(255, 37, 37, 37),
+                      border: Border.all(color: const Color.fromARGB(153, 32, 32, 32)),
+                        color: const Color.fromARGB(255, 37, 37, 37),
                         borderRadius: BorderRadius.circular(5)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           "The Upload",
                           style: TextStyle(

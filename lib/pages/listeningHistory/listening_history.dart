@@ -6,6 +6,8 @@ import 'widgets/appbar_listeninghistory.dart';
 
 class ListeningHistoryPage extends StatefulWidget {
   static String id = "ListeningHistory";
+
+  const ListeningHistoryPage({super.key});
   @override
   State<ListeningHistoryPage> createState() => _ListeningHistoryPageState();
 }
@@ -36,15 +38,15 @@ class _ListeningHistoryPageState extends State<ListeningHistoryPage> {
 // ignore: must_be_immutable
 class MainBodyListeningHistory extends StatelessWidget {
   bool trash;
-  MainBodyListeningHistory(this.trash);
+  MainBodyListeningHistory(this.trash, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return trash
         ? FadeInLeft(
-            delay: Duration(microseconds: 600),
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
+            delay: const Duration(microseconds: 600),
+            child: const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text("Find all the tracks you\'ve listened to here",
                     style: TextStyle(
                         color: Color.fromARGB(255, 134, 134, 134),
@@ -53,9 +55,9 @@ class MainBodyListeningHistory extends StatelessWidget {
         : ListView(children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 10),
                   child: Text(
                     "No. of Tracks",
                     style: TextStyle(color: Color.fromARGB(255, 134, 134, 134)),

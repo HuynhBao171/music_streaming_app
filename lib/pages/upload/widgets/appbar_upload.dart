@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:line_icons/line_icons.dart';
 
 // ignore: must_be_immutable
 class CustomAppBarUpload extends StatelessWidget {
@@ -14,7 +13,7 @@ class CustomAppBarUpload extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           )),
@@ -22,10 +21,10 @@ class CustomAppBarUpload extends StatelessWidget {
       expandedHeight: 100,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        titlePadding: EdgeInsets.only(bottom: 13, right: 180),
+        titlePadding: const EdgeInsets.only(bottom: 13, right: 180),
         title: Text(
           title,
-          style: TextStyle(fontSize: 27, color: Colors.black),
+          style: const TextStyle(fontSize: 27, color: Colors.black),
         ),
       ),
       backgroundColor: Colors.white,
