@@ -7,9 +7,9 @@ xmlns:tools="http://schemas.android.com/tools"
     <uses-permission android:name="android.permission.INTERNET"/>
 
    <application
-        android:label="music_streaming_app"
+        android:label="Melodify"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/music">
         <activity
             android:name="com.ryanheise.audioservice.AudioServiceActivity"
             android:exported="true"

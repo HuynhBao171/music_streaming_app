@@ -36,25 +36,8 @@ class MainBodyPlaylist extends StatefulWidget {
   State<MainBodyPlaylist> createState() => _MainBodyPlaylistState();
 }
 
-class _MainBodyPlaylistState extends State<MainBodyPlaylist>
-    with TickerProviderStateMixin {
-  AnimationController? controller;
+class _MainBodyPlaylistState extends State<MainBodyPlaylist>{
   final newPlaylistNameController = TextEditingController();
-
-  @override
-  initState() {
-    super.initState();
-    controller = BottomSheet.createAnimationController(this);
-    controller?.duration = const Duration(seconds: 1);
-    controller?.reverseDuration = const Duration(seconds: 0);
-    controller?.drive(CurveTween(curve: Curves.easeIn));
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

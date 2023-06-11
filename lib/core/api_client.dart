@@ -23,10 +23,10 @@ class ApiClient {
     }
   }
 
-  Future<http.Response?> login(String email, String password) async {
+  Future<http.Response?> login(String username, String password) async {
     try {
       final response = await http.post(
-        Uri.parse('${Endpoint.music}/Accounts/login/$email&$password'),
+        Uri.parse('${Endpoint.music}/Accounts/login/$username&$password'),
       );
       return response;
     } catch (e) {

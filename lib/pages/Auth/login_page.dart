@@ -4,6 +4,7 @@ import '../../core/api_client.dart';
 import '../../widgets/navbar.dart';
 import 'register_page.dart';
 import 'widgets/my_button.dart';
+import 'widgets/my_passwordfield.dart';
 import 'widgets/my_textfield.dart';
 import 'widgets/square_tile.dart';
 
@@ -17,40 +18,41 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final ApiClient _apiClient = ApiClient();
-  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
   // sign user in method
   void LogIn() async {
-  final response = await _apiClient.login(emailController.text, passwordController.text);
+    final response = await _apiClient.login(
+        usernameController.text, passwordController.text);
 
-  if (response != null && response.statusCode == 200) {
-    // The user was successfully logged in.
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("loggedIn", true);
-    prefs.setString("UserEmail", emailController.text);
+    if (response != null && response.statusCode == 200) {
+      // The user was successfully logged in.
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool("loggedIn", true);
+      prefs.setString("UserName", usernameController.text);
 
-    Navigator.of(context).push(MaterialPageRoute(builder: ((context) => CustomNavBar())));
-  } else {
-    // There was an error logging in the user.
-    var message = 'An error occurred. Please try again later.';
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: ((context) => CustomNavBar())));
+    } else {
+      // There was an error logging in the user.
+      var message = 'An error occurred. Please try again later.';
 
-    if (response != null) {
-      if (response.statusCode == 401) {
-        message = 'Invalid email or password.';
-      } else {
-        message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
+      if (response != null) {
+        if (response.statusCode == 401) {
+          message = 'Invalid email or password.';
+        } else {
+          message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
+        }
       }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
     }
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,30 +64,29 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 50),
-              const Icon(
-                Icons.lock,
-                size: 100,
-              ),
+              // const Icon(
+              //   Icons.lock,
+              //   size: 100,
+              // ),
+              Image.asset('assets/icons/appicon.png',height: 150,),
               const SizedBox(height: 50),
               Text(
-                'Welcome back you\'ve been missed!',
+                'Welcome back!',
                 style: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 16,
                 ),
               ),
-
               const SizedBox(height: 25),
               MyTextField(
-                controller: emailController,
-                labelText: 'Email',
-                obscureText: false,
+                controller: usernameController,
+                labelText: 'Username',
+                keyboardType: TextInputType.name,
+                icon: Icons.person_rounded,
               ),
               const SizedBox(height: 10),
-              MyTextField(
+              MyPasswordField(
                 controller: passwordController,
-                labelText: 'Password',
-                obscureText: true,
               ),
               const SizedBox(height: 10),
               Padding(
@@ -102,8 +103,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 25),
               MyButton(
-                text: "Sign in",
-                onTap: () async{
+                text: "Login",
+                onTap: () async {
                   LogIn();
                 },
               ),
@@ -135,9 +136,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 50),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   SquareTile(imagePath: 'assets/icons/facebook.png'),
                   SizedBox(width: 25),
                   SquareTile(imagePath: 'assets/icons/google.png')
@@ -153,9 +154,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(width: 4),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => RegisterPage())));
+                          builder: ((context) => RegisterPage())));
                     },
                     child: const Text(
                       'Register now',

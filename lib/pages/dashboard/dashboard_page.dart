@@ -42,8 +42,7 @@ class _MainBodyDashboardState extends State<MainBodyDashboard> {
 
   Future<void> getDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("UserEmail", "manduong2k2");
-    username = prefs.getString("UserEmail")!;
+    username = prefs.getString("UserName")!;
   }
 
   @override

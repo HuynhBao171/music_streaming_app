@@ -60,7 +60,7 @@ class PlayerButtons extends StatelessWidget {
                   iconSize: 75,
                   icon: const Icon(Icons.replay_circle_filled_outlined, color: Colors.white,),
                   );
-                };
+                }
               }
               else {
                 return const CircularProgressIndicator();

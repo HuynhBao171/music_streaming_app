@@ -35,7 +35,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
       floatingActionButton: Visibility(
         visible: !showNav,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.8),
             borderRadius: const BorderRadius.all(Radius.circular(100)),
@@ -50,35 +50,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 2),
-            // child: GNav(
-            //   color: Colors.white,
-            //   rippleColor: Colors.orange,
-            //   activeColor: Colors.orange,
-            //   hoverColor: Colors.orange,
-            // //  tabBackgroundColor: Colors.grey,
-            //   gap: 30,
-            //   padding: const EdgeInsets.all(14),
-            //   tabs: const [
-            //     GButton(
-            //       icon: Icons.home,
-            //       text: 'Home',
-            //     ),
-            //     GButton(
-            //       icon: Icons.search,
-            //       text: 'Search',
-            //     ),
-            //     GButton(
-            //       icon: Icons.library_books,
-            //       text: 'Library',
-            //     ),
-            //   ],
-            //   selectedIndex: _selectedIndex,
-            //     onTabChange: (index) {
-            //       setState(() {
-            //         _selectedIndex = index;
-            //       });
-            //     }
-            // ),
             child: CustomNavigationBar(
               iconSize: 24.0,
               selectedColor: Colors.orange,

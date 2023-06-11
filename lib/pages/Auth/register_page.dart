@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/api_client.dart';
 import 'login_page.dart';
 import 'widgets/my_button.dart';
+import 'widgets/my_passwordfield.dart';
 import 'widgets/my_textfield.dart';
 import 'widgets/square_tile.dart';
 
@@ -21,26 +22,28 @@ class _RegisterPageState extends State<RegisterPage> {
 
   // sign user in method
   void signIn() async {
-  final response = await _apiClient.signup(usernameController.text, emailController.text, passwordController.text);
+    final response = await _apiClient.signup(
+        usernameController.text, emailController.text, passwordController.text);
 
-  if (response != null && response.statusCode == 200) {
-    // The user was successfully signed up.
-    Navigator.of(context).push(MaterialPageRoute(builder: ((context) => LoginPage())));
-  } else {
-    // There was an error signing up the user.
-    var message = 'An error occurred. Please try again later.';
+    if (response != null && response.statusCode == 200) {
+      // The user was successfully signed up.
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: ((context) => LoginPage())));
+    } else {
+      // There was an error signing up the user.
+      var message = 'An error occurred. Please try again later.';
 
-    if (response != null) {
-      message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
+      if (response != null) {
+        message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
     }
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +55,8 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 50),
-              const Icon(
-                Icons.lock,
-                size: 100,
-              ),
-              const SizedBox(height: 50),
+              Image.asset('assets/icons/appicon.png',height: 150,),
+              const SizedBox(height: 30),
               Text(
                 'Let\'s create an account for you!',
                 style: TextStyle(
@@ -64,31 +64,30 @@ class _RegisterPageState extends State<RegisterPage> {
                   fontSize: 16,
                 ),
               ),
-
-              const SizedBox(height: 25),
+              const SizedBox(height: 20),
               MyTextField(
                 controller: usernameController,
                 labelText: 'Username',
-                obscureText: false,
+                keyboardType: TextInputType.name,
+                icon: Icons.person_rounded,
               ),
               const SizedBox(height: 10),
               MyTextField(
                 controller: emailController,
                 labelText: 'Email',
-                obscureText: true,
+                keyboardType: TextInputType.emailAddress,
+                icon: Icons.email_rounded,
               ),
               const SizedBox(height: 10),
-              MyTextField(
+              MyPasswordField(
                 controller: passwordController,
-                labelText: 'Password',
-                obscureText: true,
               ),
               const SizedBox(height: 25),
               MyButton(
                 text: "Sign up",
-                onTap: (){
-                      signIn();
-                    },
+                onTap: () {
+                  signIn();
+                },
               ),
               const SizedBox(height: 50),
               Padding(
@@ -118,15 +117,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               const SizedBox(height: 50),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   SquareTile(imagePath: 'assets/icons/facebook.png'),
                   SizedBox(width: 25),
                   SquareTile(imagePath: 'assets/icons/google.png')
                 ],
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 35),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -136,9 +135,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(width: 4),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => LoginPage())));
+                          builder: ((context) => LoginPage())));
                     },
                     child: const Text(
                       'Login now',

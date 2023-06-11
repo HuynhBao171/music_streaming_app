@@ -4,7 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:music_streaming_app/pages/Home/widgets/follow_artist_section.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../model/playlist.dart';
 import '../../model/song.dart';
+import '../../widgets/playlist_listview_horizontal.dart';
 import '../../widgets/repetitious_double_text.dart';
 import '../../widgets/repetitious_listview_horizontal.dart';
 import '../../widgets/repetitious_text.dart';
@@ -25,8 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> getDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("UserEmail", "Huynh@gmail.com");
-    username = prefs.getString("UserEmail")!;
+    username = prefs.getString("UserName")!;
   }
   @override
   Widget build(BuildContext context) {
@@ -58,17 +59,17 @@ class MainBody extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        // PlaylistListViewHorizontal(playlists: Playlist.dailyMix,),
-        const RepetitiousListViewHorizontal(),
+        PlaylistListViewHorizontal(playlists: Playlist.dailyMix,),
+        // const RepetitiousListViewHorizontal(),
         const SizedBox(
           height: 10,
         ),
-        RepetitiousText("Recently Played"),
+        RepetitiousText("Songs of the week"),
         const SizedBox(
           height: 5,
         ),
-        // PlaylistListViewHorizontal(playlists: Playlist.album,),
-        const RepetitiousListViewHorizontal(),
+        PlaylistListViewHorizontal(playlists: Playlist.album,),
+        // const RepetitiousListViewHorizontal(),
         const SizedBox(
           height: 10,
         ),

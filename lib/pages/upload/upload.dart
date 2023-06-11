@@ -65,11 +65,9 @@ class MainBodyUpload extends StatefulWidget {
   State<MainBodyUpload> createState() => _MainBodyUploadState();
 }
 
-class _MainBodyUploadState extends State<MainBodyUpload>
-    with TickerProviderStateMixin {
+class _MainBodyUploadState extends State<MainBodyUpload> {
   File? _image;
   String? _songName;
-  AnimationController? controller;
   String? _selectedGenre;
   final songController = TextEditingController();
   final describeController = TextEditingController();
@@ -84,144 +82,132 @@ class _MainBodyUploadState extends State<MainBodyUpload>
   ];
 
   @override
-  initState() {
-    super.initState();
-    controller = BottomSheet.createAnimationController(this);
-    controller?.duration = const Duration(seconds: 1);
-    controller?.reverseDuration = const Duration(seconds: 0);
-    controller?.drive(CurveTween(curve: Curves.easeIn));
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                _selectImage();
-              },
-              child: Container(
-                width: 150,
-                height: 150,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  border: Border.all(color: Colors.black.withOpacity(0.1)),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: _image != null
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.file(
-                            _image!,
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                      : const Icon(LineIcons.camera),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              child: DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey.shade200,
-                  labelText: 'Genre',
-                  labelStyle: TextStyle(color: Colors.grey[500]),
-                ),
-                value: _selectedGenre,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedGenre = value;
-                  });
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  _selectImage();
                 },
-                items: _genres.map((genre) {
-                  return DropdownMenuItem(
-                    value: genre,
-                    child: Text(genre),
-                  );
-                }).toList(),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  flex: 4,
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    border: Border.all(color: Colors.black.withOpacity(0.1)),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: Center(
-                    child: _songName != null
-                        ? TextField(
-                            controller: songController,
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade400),
-                              ),
-                              fillColor: Colors.grey.shade200,
-                              filled: true,
-                              labelText: 'Song name',
-                              labelStyle: TextStyle(color: Colors.grey[500]),
+                    child: _image != null
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.file(
+                              _image!,
+                              width: 150,
+                              height: 150,
+                              fit: BoxFit.cover,
                             ),
                           )
-                        : TextField(
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade400),
-                              ),
-                              fillColor: Colors.grey.shade200,
-                              filled: true,
-                              labelText: "Choose the song",
-                              labelStyle: TextStyle(color: Colors.grey[500]),
-                            ),
-                          ),
+                        : const Icon(LineIcons.camera),
                   ),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    onPressed: () async {
-                      await _selectAudio();
-                    },
-                    icon: const Icon(LineIcons.music),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: describeController,
-              decoration: InputDecoration(
-                enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey.shade400),
-                ),
-                fillColor: Colors.grey.shade200,
-                filled: true,
-                labelText: "Describe your track",
-                labelStyle: TextStyle(color: Colors.grey[500]),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              SizedBox(
+                child: DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
+                    labelText: 'Genre',
+                    labelStyle: TextStyle(color: Colors.grey[500]),
+                  ),
+                  value: _selectedGenre,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedGenre = value;
+                    });
+                  },
+                  items: _genres.map((genre) {
+                    return DropdownMenuItem(
+                      value: genre,
+                      child: Text(genre),
+                    );
+                  }).toList(),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: Center(
+                      child: _songName != null
+                          ? TextField(
+                              controller: songController,
+                              decoration: InputDecoration(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey.shade400),
+                                ),
+                                fillColor: Colors.grey.shade200,
+                                filled: true,
+                                labelText: 'Song name',
+                                labelStyle: TextStyle(color: Colors.grey[500]),
+                              ),
+                            )
+                          : TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey.shade400),
+                                ),
+                                fillColor: Colors.grey.shade200,
+                                filled: true,
+                                labelText: "Choose the song",
+                                labelStyle: TextStyle(color: Colors.grey[500]),
+                              ),
+                            ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: IconButton(
+                      onPressed: () async {
+                        await _selectAudio();
+                      },
+                      icon: const Icon(LineIcons.music),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: describeController,
+                decoration: InputDecoration(
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade400),
+                  ),
+                  fillColor: Colors.grey.shade200,
+                  filled: true,
+                  labelText: "Describe your track",
+                  labelStyle: TextStyle(color: Colors.grey[500]),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -244,7 +230,6 @@ class _MainBodyUploadState extends State<MainBodyUpload>
   Future<void> _selectImage() async {
     showModalBottomSheet(
       context: context,
-      transitionAnimationController: controller,
       enableDrag: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       builder: (BuildContext context) {

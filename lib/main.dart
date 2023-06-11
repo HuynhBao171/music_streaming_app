@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: (isLoggedIn) ? CustomNavBar.id : LoginPage.id ,
       initialRoute: CustomNavBar.id,
-      // home: const LoginPage(),
       routes: {
         HomePage.id: (context) => const HomePage(),
         DashboardPage.id: (context) => const DashboardPage(),

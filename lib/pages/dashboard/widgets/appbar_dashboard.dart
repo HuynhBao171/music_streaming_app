@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:line_icons/line_icons.dart';
-
 // ignore: must_be_immutable
 class CustomAppBarDashboard extends StatelessWidget {
   String title;
