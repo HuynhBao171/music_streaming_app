@@ -25,32 +25,21 @@ class PlaylistCard extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => PlaylistPage(dominantColor: dominantColor, playlist: playlist,))));
-                },
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => PlaylistPage(
+                        dominantColor: dominantColor,
+                        playlist: playlist,
+                      ))));
+            },
             child: SizedBox(
               width: width,
               height: height,
               child: Stack(
                 children: [
+                  Center(),
                   Positioned(
                     bottom: 3,
-                    right: 3,
-                    child: Container(
-                      width: 125,
-                      height: 125,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: dominantColor.withOpacity(0.1),
-                        ),
-                        color: dominantColor.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 9,
-                    right: 9,
+                    right: 5,
                     child: Container(
                       width: 130,
                       height: 130,
@@ -58,7 +47,22 @@ class PlaylistCard extends StatelessWidget {
                         border: Border.all(
                           color: dominantColor.withOpacity(0.1),
                         ),
-                        color: dominantColor,
+                        color: dominantColor.withOpacity(0.4),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 9,
+                    right: 10,
+                    child: Container(
+                      width: 130,
+                      height: 130,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: dominantColor.withOpacity(0.1),
+                        ),
+                        color: dominantColor.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(5),
                       ),
                     ),
@@ -75,7 +79,7 @@ class PlaylistCard extends StatelessWidget {
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: NetworkImage(playlist.coverUrl.toString()),
+                          image: AssetImage(playlist.coverUrl.toString()),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -91,13 +95,6 @@ class PlaylistCard extends StatelessWidget {
               Text(
                 '${playlist.profileId} • ${playlist.name}',
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-              ),
-              Text(
-                'Related tracks',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                    color: Colors.grey),
               ),
             ],
           )

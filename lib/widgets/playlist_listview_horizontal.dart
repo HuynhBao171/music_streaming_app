@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../model/playlist.dart';
-import '../utils/color_utils.dart';
+import '../utils/color_utils.dart' show getDominantColor;
 import '../pages/Playlist/widgets/playlist_card.dart';
 
 class PlaylistListViewHorizontal extends StatelessWidget {
   List<Playlist> playlists;
   PlaylistListViewHorizontal({super.key, required this.playlists});
-
-  Color? _dominantColor;
 
   Future<Color> _updateDominantColor(ImageProvider imageProvider) async {
     final dominantColor =
@@ -29,7 +27,7 @@ class PlaylistListViewHorizontal extends StatelessWidget {
         itemBuilder: (context, index) {
           return FutureBuilder<Color>(
             future: _updateDominantColor(
-                NetworkImage(playlists[index].coverUrl.toString())),
+                AssetImage(playlists[index].coverUrl.toString())),
             builder: (BuildContext context, AsyncSnapshot<Color> snapshot) {
               if (snapshot.hasData) {
                 return PlaylistCard(
@@ -45,20 +43,12 @@ class PlaylistListViewHorizontal extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        width: currentWidth / 2.5,
-                        height: currentHeight / 4.8,
-                        child: Center(
-                          child: Positioned(
-                            bottom: 15,
-                            right: 16,
-                            child: Container(
-                              width: 135,
-                              height: 135,
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade400,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
+                        child: Container(
+                          width: 130,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade500,
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       ),

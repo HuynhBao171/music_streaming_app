@@ -75,7 +75,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.network(
+                child: Image.asset(
                   widget.playlist.coverUrl.toString(),
                   height: MediaQuery.of(context).size.height * 0.3,
                   width: MediaQuery.of(context).size.height * 0.3,

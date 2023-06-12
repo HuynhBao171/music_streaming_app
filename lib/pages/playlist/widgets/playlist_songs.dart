@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../model/playlist.dart';
-import '../../../utils/color_utils.dart';
 import '../../PlaySong/play_song_page.dart';
 
 class PlaylistSongs extends StatelessWidget {
@@ -13,19 +12,9 @@ class PlaylistSongs extends StatelessWidget {
     required this.index,
   });
 
-  Future<Color> _updateDominantColor(ImageProvider _imageProvider) async {
-    final dominantColor =
-        await getDominantColor(_imageProvider, const Size(135, 135));
-    return dominantColor;
-  }
-
   @override
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
-    Color? dominantColor;
-    _updateDominantColor(AssetImage(playlist.songs[index].coverUrl.toString())).then((value) {
-      dominantColor = value;
-    });
 
     return Container(
       margin: const EdgeInsets.all(10),
@@ -36,10 +25,9 @@ class PlaylistSongs extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: ((context) => PlaySongPage(
-                        dominantColor: dominantColor,
-                        // initialIndex: index,
-                        // playlist: playlist.songs,
-                        song: playlist.songs[index],
+                        initialIndex: index,
+                        playlist: playlist.songs, nameList: playlist.name,
+                        // song: playlist.songs[index], dominantColor: Colors.amber,
                       ))));
             },
             child: Container(

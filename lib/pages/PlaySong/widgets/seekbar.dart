@@ -96,3 +96,29 @@ class _SeekBarState extends State<SeekBar> {
    );
   }
 }
+    // Expanded(
+    //         child: SliderTheme(
+    //           data: SliderTheme.of(context).copyWith(
+    //             trackHeight: 4,
+    //             thumbShape: const RoundSliderThumbShape(
+    //               disabledThumbRadius: 4,
+    //               enabledThumbRadius: 4,
+    //             ),
+    //             overlayShape: const RoundSliderOverlayShape(
+    //               overlayRadius: 10,
+    //             ),
+    //             activeTrackColor: Colors.white.withOpacity(0.2),
+    //             inactiveTrackColor: Colors.white,
+    //             thumbColor: Colors.white,
+    //             overlayColor: Colors.white,
+    //           ),
+    //           child: Slider(
+    //             min: 0,
+    //             max: _duration.inSeconds.toDouble(),
+    //             value: _position.inSeconds.toDouble(),
+    //             onChanged: (value) {
+    //               _audioPlayer.seek(Duration(seconds: value.toInt()));
+    //             },
+    //           ),
+    //         ),
+    //       ),
