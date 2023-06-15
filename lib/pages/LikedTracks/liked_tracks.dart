@@ -70,7 +70,7 @@ class MainBodyLikedTracksHistory extends StatelessWidget {
                 name: 'My favorite playlist',
                 // songs: favoriteSongs,
                 profileId: '123',
-                coverUrl: 'assets/images/demo.png',
+                image: 'assets/images/demo.png',
               );
               return ListView(
                 children: [

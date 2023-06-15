@@ -51,7 +51,7 @@ class _MainBodySearchState extends State<MainBodySearch> {
     id: 1,
     name: 'Search Results',
     profileId: '123',
-    coverUrl: 'assets/images/demo.png',
+    image: 'assets/images/demo.png',
   );
 
   void searchAPI(String query) async {

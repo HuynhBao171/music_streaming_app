@@ -3,16 +3,16 @@ class Song {
   String? name;
   String? url;
   String? profileId;
-  String? coverUrl;
+  String? image;
 
-  Song({this.id, this.name, this.url, this.profileId, this.coverUrl});
+  Song({this.id, this.name, this.url, this.profileId, this.image});
 
   Song.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     url = json['url'];
     profileId = json['profileId'];
-    coverUrl = json['coverUrl'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -21,7 +21,7 @@ class Song {
     data['name'] = name;
     data['url'] = url;
     data['profileId'] = profileId;
-    data['coverUrl'] = coverUrl;
+    data['image'] = image;
     return data;
   }
 

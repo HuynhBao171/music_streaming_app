@@ -85,7 +85,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
         _initialIndex = newIndex ?? 0;
       });
       _updateDominantColor(
-        NetworkImage(widget.playlist![_initialIndex].coverUrl.toString()),
+        NetworkImage(widget.playlist![_initialIndex].image.toString()),
       ).then((value) {
         setState(() {
           _dominantColor = value;
@@ -239,7 +239,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                      widget.playlist![_initialIndex].coverUrl.toString()),
+                      widget.playlist![_initialIndex].image.toString()),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(20),

@@ -52,7 +52,7 @@ class PlaylistSongs extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.network(
-                    songs![index].coverUrl.toString(),
+                    songs![index].image.toString(),
                     height: MediaQuery.of(context).size.height * 0.1,
                     width: MediaQuery.of(context).size.height * 0.1,
                     fit: BoxFit.cover,

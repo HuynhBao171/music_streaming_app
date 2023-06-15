@@ -29,7 +29,7 @@ class PlaylistListViewHorizontal extends StatelessWidget {
         itemBuilder: (context, index) {
           return FutureBuilder<Color>(
             future: _updateDominantColor(
-                NetworkImage(playlists![index].coverUrl.toString())),
+                NetworkImage(playlists![index].image.toString())),
             builder: (BuildContext context, AsyncSnapshot<Color> snapshot) {
               if (snapshot.hasData) {
                 return  PlaylistCard(

@@ -3,15 +3,15 @@ class Playlist {
   int? id;
   String? name;
   String? profileId;
-  String? coverUrl;
+  String? image;
 
-  Playlist({this.id, this.name, this.profileId, this.coverUrl});
+  Playlist({this.id, this.name, this.profileId, this.image});
 
   Playlist.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     profileId = json['profileId'];
-    coverUrl = json['coverUrl'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -19,7 +19,7 @@ class Playlist {
     data['id'] = id;
     data['name'] = name;
     data['profileId'] = profileId;
-    data['coverUrl'] = coverUrl;
+    data['image'] = image;
     return data;
   }
 

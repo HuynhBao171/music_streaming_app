@@ -79,7 +79,7 @@ class PlaylistCard extends StatelessWidget {
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: NetworkImage(playlist.coverUrl.toString()),
+                          image: NetworkImage(playlist.image.toString()),
                           fit: BoxFit.cover,
                         ),
                       ),
