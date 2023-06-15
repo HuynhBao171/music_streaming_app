@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/api_client.dart';
 import '../../widgets/navbar.dart';
+import 'forget_password_mail_page.dart';
 import 'register_page.dart';
 import 'widgets/my_button.dart';
+import 'widgets/my_forget_password_button.dart';
 import 'widgets/my_passwordfield.dart';
 import 'widgets/my_textfield.dart';
 import 'widgets/square_tile.dart';
@@ -68,7 +70,10 @@ class _LoginPageState extends State<LoginPage> {
               //   Icons.lock,
               //   size: 100,
               // ),
-              Image.asset('assets/icons/appicon.png',height: 150,),
+              Image.asset(
+                'assets/icons/appicon.png',
+                height: 150,
+              ),
               const SizedBox(height: 50),
               Text(
                 'Welcome back!',
@@ -94,9 +99,12 @@ class _LoginPageState extends State<LoginPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.grey[600]),
+                    InkWell(
+                      onTap: _forgotPassword,
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: Colors.grey[600]),
+                      ),
                     ),
                   ],
                 ),
@@ -153,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   const SizedBox(width: 4),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: ((context) => RegisterPage())));
@@ -170,6 +178,45 @@ class _LoginPageState extends State<LoginPage> {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _forgotPassword() async {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+      ),
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Make Selection!",
+                style: Theme.of(context).textTheme.displayMedium),
+            const SizedBox(height: 30.0),
+            MyForgetPasswordButton(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: ((context) => ForgetPasswordMailPage())));
+              },
+              title: "Email",
+              subTitle: "Reset via E-Mail Verification.",
+              btnIcon: Icons.mail_outline_rounded,
+            ),
+            const SizedBox(height: 20.0),
+            MyForgetPasswordButton(
+              onTap: () {},
+              title: "Phone No",
+              subTitle: "Reset via Phone Verification.",
+              btnIcon: Icons.mobile_friendly_rounded,
+            ),
+          ],
         ),
       ),
     );

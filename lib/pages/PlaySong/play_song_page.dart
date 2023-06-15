@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart' show MediaItem;
+import 'package:like_button/like_button.dart';
 
 import '../../model/song.dart';
 import '../../utils/color_utils.dart';
@@ -9,7 +12,7 @@ class PlaySongPage extends StatefulWidget {
   final String? nameList;
   final int initialIndex;
 
-  PlaySongPage({
+  const PlaySongPage({
     Key? key,
     required this.playlist,
     required this.initialIndex,
@@ -17,23 +20,26 @@ class PlaySongPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _PlaySongPageState createState() => _PlaySongPageState();
 }
 
 class _PlaySongPageState extends State<PlaySongPage> {
+  final box = Hive.box<Song>('list_favorite');
   late ConcatenatingAudioSource _playlist;
   late AudioPlayer _audioPlayer;
   late int _initialIndex;
   bool _isPlaying = true;
+  bool _isShuffling = false;
+  bool _isFavorite = false;
+  LoopMode _loopMode = LoopMode.off;
   Duration _duration = const Duration();
   Duration _position = const Duration();
   Color? _dominantColor;
-  LoopMode _loopMode = LoopMode.off;
-  bool _isShuffling = false;
 
-  Future<Color> _updateDominantColor(ImageProvider _imageProvider) async {
+  Future<Color> _updateDominantColor(ImageProvider imageProvider) async {
     final dominantColor =
-        await getDominantColor(_imageProvider, const Size(135, 135));
+        await getDominantColor(imageProvider, const Size(135, 135));
     return dominantColor;
   }
 
@@ -49,7 +55,13 @@ class _PlaySongPageState extends State<PlaySongPage> {
     _playlist = ConcatenatingAudioSource(
       children: widget.playlist
           .map(
-            (song) => AudioSource.uri(Uri.parse('asset:/${song.url}')),
+            (song) => AudioSource.uri(Uri.parse('asset:/${song.url}'),
+                tag: MediaItem(
+                  id: song.id.toString(),
+                  title: song.name.toString(),
+                  artist: song.profileId,
+                  artUri: Uri.parse('asset:/${song.coverUrl}'),
+                )),
           )
           .toList(),
     );
@@ -60,11 +72,11 @@ class _PlaySongPageState extends State<PlaySongPage> {
         _duration = newDuration ?? const Duration();
       });
     });
-    
+
     _audioPlayer.positionStream.listen((position) {
-        setState(() {
-          _position = position;
-        });
+      setState(() {
+        _position = position;
+      });
     });
 
     _audioPlayer.currentIndexStream.listen((newIndex) {
@@ -95,6 +107,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
   @override
   void initState() {
     super.initState();
+    // _isFavorite = Hive.box<Song>('list_favorite').contains(widget.playlist[_initialIndex]);
     _initialIndex = widget.initialIndex;
     _initAudioPlayer();
   }
@@ -223,32 +236,58 @@ class _PlaySongPageState extends State<PlaySongPage> {
             ),
           ),
           const SizedBox(height: 40),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Text(
-              widget.playlist[_initialIndex].name.toString(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    child: Text(
+                      widget.playlist[_initialIndex].name.toString(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    child: Text(
+                      widget.playlist[_initialIndex].profileId.toString(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Text(
-              widget.playlist[_initialIndex].profileId.toString(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                child: LikeButton(
+                  isLiked: _isFavorite,
+                  onTap: (isLiked) async {
+                    setState(() {
+                      _isFavorite = !_isFavorite;
+                      // if (_isFavorite) {
+                      //   box.add(widget.playlist[_initialIndex]);
+                      // } else {
+                      //   box.delete(widget.playlist[_initialIndex]);
+                      // }
+                    });
+                    return true;
+                  },
+                ),
               ),
-            ),
+            ],
           ),
           const SizedBox(height: 30),
-           Padding(
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(

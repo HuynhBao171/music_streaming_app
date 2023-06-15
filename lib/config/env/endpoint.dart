@@ -1,3 +1,3 @@
 class Endpoint {
-  static String music = "https://manduong2k2.bsite.net/api";
+  static String music = "https://july2nd.bsite.net/api";
 }

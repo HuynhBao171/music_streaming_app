@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../core/api_client.dart';
 import 'widgets/appbar_upload.dart';
 
 class UploadPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
+  final ApiClient _apiClient = ApiClient();
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
@@ -33,7 +35,7 @@ class _UploadPageState extends State<UploadPage> {
         child: FloatingActionButton.extended(
           elevation: 20,
           onPressed: () async {
-            await _uploadAudio();
+            _uploadAudio();
           },
           highlightElevation: 5,
           splashColor: Colors.orange,
@@ -46,18 +48,38 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-  Future<void> _uploadAudio() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.audio,
-      allowMultiple: false,
-    );
-    if (result == null || result.files.isEmpty) {
-      return;
-    }
-    setState(() {});
+void _uploadAudio() async {
+    // final response = await _apiClient.login(
+    //     usernameController.text, passwordController.text);
+
+    // if (response != null && response.statusCode == 200) {
+    //   // The user was successfully logged in.
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   prefs.setBool("loggedIn", true);
+    //   prefs.setString("UserName", usernameController.text);
+
+    //   Navigator.of(context)
+    //       .push(MaterialPageRoute(builder: ((context) => CustomNavBar())));
+    // } else {
+    //   // There was an error logging in the user.
+    //   var message = 'An error occurred. Please try again later.';
+
+    //   if (response != null) {
+    //     if (response.statusCode == 401) {
+    //       message = 'Invalid email or password.';
+    //     } else {
+    //       message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
+    //     }
+    //   }
+
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(
+    //       content: Text(message),
+    //     ),
+    //   );
+    // }
   }
 }
-
 class MainBodyUpload extends StatefulWidget {
   const MainBodyUpload({super.key});
 
@@ -144,7 +166,7 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
                 children: [
                   Expanded(
                     flex: 4,
-                    child: Center(
+                    child: SizedBox(
                       child: _songName != null
                           ? TextField(
                               controller: songController,

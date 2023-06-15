@@ -33,7 +33,7 @@ class SearchInputField extends StatelessWidget {
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide.none),
-        hintText: "Search",
+        hintText: hintText,
         hintStyle: TextStyle(fontSize: 14, color: Colors.grey.shade700),
       ),
       onSubmitted: onSubmitted ?? onChanged,

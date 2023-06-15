@@ -4,6 +4,7 @@ import '../../model/playlist.dart';
 import '../../widgets/playlist_listview_horizontal.dart';
 import '../../widgets/repetitious_listview_vertical.dart';
 import '../../widgets/repetitious_text.dart';
+import '../LikedTracks/liked_tracks.dart';
 import '../ListeningHistory/listening_history.dart';
 import '../ManagerPlaylist/manager_playlist_page.dart';
 import '../Profile/profile.dart';
@@ -53,10 +54,22 @@ class MainBodyLibrary extends StatelessWidget {
             Divider(
               color: Colors.grey.shade800,
             ),
+
             const ActivityCard(title:"Liked tracks", icon: Icons.favorite),
             Divider(
               color: Colors.grey.shade800,
             ),
+
+            // InkWell(
+            //     onTap: () {
+            //       Navigator.of(context).push(
+            //           MaterialPageRoute(builder: ((context) => const LikedTracksPage())));
+            //     },
+            //     child: const ActivityCard(title: "Liked tracks", icon: Icons.favorite)),
+            // Divider(
+            //   color: Colors.grey.shade800,
+            // ),
+            
             InkWell(
                 onTap: () {
                   Navigator.of(context).push(

@@ -96,7 +96,7 @@ class MainBody extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        const RepetitiousListViewHorizontal(),
+        PlaylistListViewHorizontal(playlists: Playlist.dailyMix,),
         const SizedBox(
           height: 5,
         ),
@@ -106,7 +106,7 @@ class MainBody extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        const RepetitiousListViewHorizontal(),
+        PlaylistListViewHorizontal(playlists: Playlist.dailyMix,),
         const SizedBox(
           height: 5,
         ),
@@ -116,7 +116,7 @@ class MainBody extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        const RepetitiousListViewHorizontal(),
+        PlaylistListViewHorizontal(playlists: Playlist.dailyMix,),
         const SizedBox(
           height: 5,
         ),
