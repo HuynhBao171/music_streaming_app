@@ -58,7 +58,6 @@ class _MainBodySearchState extends State<MainBodySearch> {
     setState(() {
       recentSearches.clear();
       showRecentSearches = true;
-      showResults = true;
     });
   }
 
@@ -137,11 +136,13 @@ class _MainBodySearchState extends State<MainBodySearch> {
           Container(
             // height: currentHeight,
             child: (showResults)
-                ? SongListViewVertical(
-                    height: currentHeight-235,
-                    playlist: Playlist.dailyMix[1],
-                    songs: Playlist.dailyMix[1].songs,
-                  )
+                ? Expanded(
+                  child: SongListViewVertical(
+                      height: currentHeight-235,
+                      playlist: Playlist.dailyMix[1],
+                      songs: Playlist.dailyMix[1].songs,
+                    ),
+                )
                 : SizedBox(
                     child: showRecentSearches
                         ? Center(
