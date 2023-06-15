@@ -26,8 +26,8 @@ class _UploadPageState extends State<UploadPage> {
       body: SafeArea(
         child: NestedScrollView(
             headerSliverBuilder: (ctx, i) => [
-                  CustomAppBarUpload(title: "Upload"),
-                ],
+              CustomAppBarUpload(title: "Upload"),
+            ],
             body: const MainBodyUpload()),
       ),
       floatingActionButton: Visibility(
@@ -48,7 +48,7 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-void _uploadAudio() async {
+  void _uploadAudio() async {
     // final response = await _apiClient.login(
     //     usernameController.text, passwordController.text);
 
@@ -78,6 +78,7 @@ void _uploadAudio() async {
     //     ),
     //   );
     // }
+
   }
 }
 class MainBodyUpload extends StatefulWidget {
@@ -126,14 +127,14 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
                   child: Center(
                     child: _image != null
                         ? ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.file(
-                              _image!,
-                              width: 150,
-                              height: 150,
-                              fit: BoxFit.cover,
-                            ),
-                          )
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.file(
+                        _image!,
+                        width: 150,
+                        height: 150,
+                        fit: BoxFit.cover,
+                      ),
+                    )
                         : const Icon(LineIcons.camera),
                   ),
                 ),
@@ -169,36 +170,36 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
                     child: SizedBox(
                       child: _songName != null
                           ? TextField(
-                              controller: songController,
-                              decoration: InputDecoration(
-                                enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade400),
-                                ),
-                                fillColor: Colors.grey.shade200,
-                                filled: true,
-                                labelText: 'Song name',
-                                labelStyle: TextStyle(color: Colors.grey[500]),
-                              ),
-                            )
+                        controller: songController,
+                        decoration: InputDecoration(
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.grey.shade400),
+                          ),
+                          fillColor: Colors.grey.shade200,
+                          filled: true,
+                          labelText: 'Song name',
+                          labelStyle: TextStyle(color: Colors.grey[500]),
+                        ),
+                      )
                           : TextField(
-                              decoration: InputDecoration(
-                                enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade400),
-                                ),
-                                fillColor: Colors.grey.shade200,
-                                filled: true,
-                                labelText: "Choose the song",
-                                labelStyle: TextStyle(color: Colors.grey[500]),
-                              ),
-                            ),
+                        decoration: InputDecoration(
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.grey.shade400),
+                          ),
+                          fillColor: Colors.grey.shade200,
+                          filled: true,
+                          labelText: "Choose the song",
+                          labelStyle: TextStyle(color: Colors.grey[500]),
+                        ),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -262,7 +263,7 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
               title: const Text('Select Image from Gallery'),
               onTap: () async {
                 var image =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
+                await ImagePicker().pickImage(source: ImageSource.gallery);
 
                 if (image == null) {
                   return;
@@ -279,7 +280,7 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
               title: const Text('Take a Photo'),
               onTap: () async {
                 var image =
-                    await ImagePicker().pickImage(source: ImageSource.camera);
+                await ImagePicker().pickImage(source: ImageSource.camera);
                 if (image == null) {
                   return;
                 }

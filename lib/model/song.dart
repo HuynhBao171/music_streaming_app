@@ -12,7 +12,7 @@ class Song {
     name = json['name'];
     url = json['url'];
     profileId = json['profileId'];
-    image = json['image'];
+    image = json['imageUrl'];
   }
 
   Map<String, dynamic> toJson() {
@@ -21,7 +21,7 @@ class Song {
     data['name'] = name;
     data['url'] = url;
     data['profileId'] = profileId;
-    data['image'] = image;
+    data['imageUrl'] = image;
     return data;
   }
 

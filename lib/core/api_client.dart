@@ -197,4 +197,5 @@ class ApiClient {
       throw Exception('Failed to load data');
     }
   }
+
 }

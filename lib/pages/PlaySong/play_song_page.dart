@@ -12,7 +12,6 @@ class PlaySongPage extends StatefulWidget {
   final List<Song>? playlist;
   final String? nameList;
   final int initialIndex;
-
   const PlaySongPage({
     Key? key,
     required this.playlist,
@@ -73,7 +72,6 @@ class _PlaySongPageState extends State<PlaySongPage> {
         _duration = newDuration ?? const Duration();
       });
     });
-
     _audioPlayer.positionStream.listen((position) {
       setState(() {
         _position = position;

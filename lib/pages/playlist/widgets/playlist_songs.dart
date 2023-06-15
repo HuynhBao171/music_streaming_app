@@ -28,38 +28,41 @@ class PlaylistSongs extends StatelessWidget {
             final songs = snapshot.data;
         return Row(
           children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: ((context) => PlaySongPage(
-                          initialIndex: index,
-                          playlist: songs, nameList: playlist.name,
-                          // song: playlist.songs[index], dominantColor: Colors.amber,
-                        ))));
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    songs![index].image.toString(),
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    width: MediaQuery.of(context).size.height * 0.1,
-                    fit: BoxFit.cover,
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
                   ),
-                ),
+                ],
               ),
             ),
+            Stack(
+              children: [
+                CircleAvatar(
+                  backgroundImage: NetworkImage('${songs?[index].image}'),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: ((context) => PlaySongPage(
+                              initialIndex: index,
+                              playlist: songs, nameList: playlist.name,
+                              // song: playlist.songs[index], dominantColor: Colors.amber,
+                            ))));
+                      },
+                      icon: const Icon(Icons.play_arrow) )
+                  ,
+                ),
+              ],
+            ),
+
             const SizedBox(
               width: 5,
             ),
@@ -67,12 +70,12 @@ class PlaylistSongs extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${songs[index].name}'),
+                Text('${songs?[index].name}'),
                 const SizedBox(
                   height: 3,
                 ),
                 Text(
-                  '${songs[index].profileId}',
+                  '${songs?[index].profileId}',
                   style: const TextStyle(
                       color: Color.fromARGB(255, 134, 134, 134),
                       fontSize: 13.5,
