@@ -6,6 +6,7 @@ import '../../model/playlist.dart';
 import '../../model/song.dart';
 import '../../widgets/appbar.dart';
 import '../../widgets/song_listview_vertical.dart';
+import '../PlaySong/play_song_page.dart';
 import 'widgets/repetitious_search_result.dart';
 import 'widgets/search_input_field.dart';
 
@@ -46,7 +47,7 @@ class _MainBodySearchState extends State<MainBodySearch> {
   bool showResults = false;
   bool showRecentSearches = true;
   List<String> recentSearches = [];
-  late List<Song> songsSearches;
+  late List<Song> songsSearches=[];
   late Playlist playlistSearches = Playlist(
     id: 1,
     name: 'Search Results',
@@ -147,12 +148,98 @@ class _MainBodySearchState extends State<MainBodySearch> {
             // height: currentHeight,
             child: (showResults)
                 ? Expanded(
-                    child: SongListViewVertical(
-                      height: currentHeight - 235,
-                      playlist: playlistSearches,
-                      songs: songsSearches,
-                    ),
-                  )
+                child: ListView.builder(
+                  itemCount: songsSearches.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Stack(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: NetworkImage('${songsSearches?[index].image}'),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: ((context) => PlaySongPage(
+                                          initialIndex: index,
+                                          playlist: songsSearches, nameList: playlistSearches.name,
+                                          // song: playlist.songs[index], dominantColor: Colors.amber,
+                                        ))));
+                                  },
+                                  icon: const Icon(Icons.play_arrow) )
+                              ,
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('${songsSearches?[index].name}'),
+                            const SizedBox(
+                              height: 3,
+                            ),
+                            Text(
+                              '${songsSearches?[index].profileId}',
+                              style: const TextStyle(
+                                  color: Color.fromARGB(255, 134, 134, 134),
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              height: 3,
+                            ),
+                            Row(children: [
+                              const Icon(
+                                Icons.play_arrow,
+                                color: Color.fromARGB(255, 134, 134, 134),
+                                size: 15,
+                              ),
+                              RichText(
+                                text: const TextSpan(
+                                  text: '390K ',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 134, 134, 134),
+                                    fontSize: 13,
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: '•',
+                                        style: TextStyle(fontWeight: FontWeight.bold)),
+                                    TextSpan(text: ' 4:26'),
+                                  ],
+                                ),
+                              )
+                            ]),
+                          ],
+                        ),
+                        Expanded(child: Container()),
+                        const Icon(Icons.more_vert, color: Color.fromARGB(255, 134, 134, 134))
+                      ],
+                    );
+                  }),
+                )
                 : SizedBox(
                     child: showRecentSearches
                         ? Center(
