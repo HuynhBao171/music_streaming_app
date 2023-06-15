@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class RepetitiousListViewVertical extends StatelessWidget {
   double height;
   RepetitiousListViewVertical({super.key, required this.height});

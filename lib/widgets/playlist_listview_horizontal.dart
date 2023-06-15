@@ -5,7 +5,7 @@ import '../utils/color_utils.dart' show getDominantColor;
 import '../pages/Playlist/widgets/playlist_card.dart';
 
 class PlaylistListViewHorizontal extends StatelessWidget {
-  final List<Playlist> playlists;
+  final List<Playlist>? playlists;
 
   const PlaylistListViewHorizontal({Key? key, required this.playlists})
       : super(key: key);
@@ -24,16 +24,16 @@ class PlaylistListViewHorizontal extends StatelessWidget {
       width: currentWidth,
       height: currentHeight / 3.6,
       child: ListView.builder(
-        itemCount: playlists.length,
+        itemCount: playlists?.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return FutureBuilder<Color>(
             future: _updateDominantColor(
-                AssetImage(playlists[index].coverUrl.toString())),
+                NetworkImage(playlists![index].coverUrl.toString())),
             builder: (BuildContext context, AsyncSnapshot<Color> snapshot) {
               if (snapshot.hasData) {
                 return  PlaylistCard(
-                  playlist: playlists[index],
+                  playlist: playlists![index],
                   height: currentWidth / 2.5,
                   width: currentHeight / 4.8,
                   dominantColor: snapshot.data!,

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../model/playlist.dart';
-import '../../widgets/playlist_listview_horizontal.dart';
 import '../../widgets/repetitious_listview_vertical.dart';
 import '../../widgets/repetitious_text.dart';
-import '../LikedTracks/liked_tracks.dart';
 import '../ListeningHistory/listening_history.dart';
 import '../ManagerPlaylist/manager_playlist_page.dart';
 import '../Profile/profile.dart';
@@ -94,7 +91,7 @@ class MainBodyLibrary extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => RecentlyPlayedPage())));
+                            builder: ((context) => const RecentlyPlayedPage())));
                       },
                       child: const Text(
                         "See All",
@@ -109,7 +106,7 @@ class MainBodyLibrary extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            PlaylistListViewHorizontal(playlists: Playlist.album,),
+            // PlaylistListViewHorizontal(playlists: Playlist.album,),
             const SizedBox(
               height: 15,
             ),
@@ -124,7 +121,7 @@ class MainBodyLibrary extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => ListeningHistoryPage())));
+                            builder: ((context) => const ListeningHistoryPage())));
                       },
                       child: const Text(
                         "See All",

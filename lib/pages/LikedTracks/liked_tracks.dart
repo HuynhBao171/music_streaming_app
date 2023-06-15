@@ -68,7 +68,7 @@ class MainBodyLikedTracksHistory extends StatelessWidget {
               final playlist = Playlist(
                 id: 1,
                 name: 'My favorite playlist',
-                songs: favoriteSongs,
+                // songs: favoriteSongs,
                 profileId: '123',
                 coverUrl: 'assets/images/demo.png',
               );

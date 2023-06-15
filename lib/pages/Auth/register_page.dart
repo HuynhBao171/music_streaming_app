@@ -24,25 +24,22 @@ class _RegisterPageState extends State<RegisterPage> {
   void signIn() async {
     final response = await _apiClient.signup(
         usernameController.text, emailController.text, passwordController.text);
-
+    var message;
     if (response != null && response.statusCode == 200) {
-      // The user was successfully signed up.
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: ((context) => LoginPage())));
+      message = 'Sign Up successfully';
     } else {
       // There was an error signing up the user.
-      var message = 'An error occurred. Please try again later.';
+      message = 'An error occurred. Please try again later.';
 
       if (response != null) {
         message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
       }
-
-      ScaffoldMessenger.of(context).showSnackBar(
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(message),
         ),
       );
-    }
   }
 
   @override

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../core/api_client.dart';
 import '../../model/playlist.dart';
+import '../../model/song.dart';
 import '../../widgets/song_listview_vertical.dart';
 import '../../widgets/repetitious_text.dart';
 import 'widgets/appbar_playlist.dart';
@@ -50,6 +52,22 @@ class MainBodyProfile extends StatefulWidget {
 }
 
 class _MainBodyProfileState extends State<MainBodyProfile> {
+
+  List<Song> songs = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSongs();
+  }
+
+  Future<void> _loadSongs() async {
+    List<Song> loadedSongs = await ApiClient().getSongsOfPlaylist(widget.playlist.id as int);
+    setState(() {
+      songs = loadedSongs;
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
@@ -75,7 +93,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.asset(
+                child: Image.network(
                   widget.playlist.coverUrl.toString(),
                   height: MediaQuery.of(context).size.height * 0.3,
                   width: MediaQuery.of(context).size.height * 0.3,
@@ -94,7 +112,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
               ),
             ),
             SongListViewVertical(
-              height: currentHeight, songs: widget.playlist.songs, playlist: widget.playlist,
+              height: currentHeight, songs: songs, playlist: widget.playlist,
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/api_client.dart';
 import 'widgets/appbar_upload.dart';
@@ -17,7 +18,6 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
-  final ApiClient _apiClient = ApiClient();
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
@@ -35,7 +35,7 @@ class _UploadPageState extends State<UploadPage> {
         child: FloatingActionButton.extended(
           elevation: 20,
           onPressed: () async {
-            _uploadAudio();
+            // _uploadAudio();
           },
           highlightElevation: 5,
           splashColor: Colors.orange,
@@ -47,39 +47,8 @@ class _UploadPageState extends State<UploadPage> {
       ),
     );
   }
-
-void _uploadAudio() async {
-    // final response = await _apiClient.login(
-    //     usernameController.text, passwordController.text);
-
-    // if (response != null && response.statusCode == 200) {
-    //   // The user was successfully logged in.
-    //   SharedPreferences prefs = await SharedPreferences.getInstance();
-    //   prefs.setBool("loggedIn", true);
-    //   prefs.setString("UserName", usernameController.text);
-
-    //   Navigator.of(context)
-    //       .push(MaterialPageRoute(builder: ((context) => CustomNavBar())));
-    // } else {
-    //   // There was an error logging in the user.
-    //   var message = 'An error occurred. Please try again later.';
-
-    //   if (response != null) {
-    //     if (response.statusCode == 401) {
-    //       message = 'Invalid email or password.';
-    //     } else {
-    //       message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
-    //     }
-    //   }
-
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(
-    //       content: Text(message),
-    //     ),
-    //   );
-    // }
-  }
 }
+
 class MainBodyUpload extends StatefulWidget {
   const MainBodyUpload({super.key});
 
@@ -89,19 +58,26 @@ class MainBodyUpload extends StatefulWidget {
 
 class _MainBodyUploadState extends State<MainBodyUpload> {
   File? _image;
+  File? _audio;
   String? _songName;
   String? _selectedGenre;
   final songController = TextEditingController();
   final describeController = TextEditingController();
+  final ApiClient _apiClient = ApiClient();
+  List<String?> _genres = [];
 
-  final List<String> _genres = [
-    'Pop',
-    'Rock',
-    'Jazz',
-    'Blues',
-    'R&B/Soul',
-    'Hip hop',
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadCategories();
+  }
+
+  Future<void> _loadCategories() async {
+    final categories = await ApiClient().getAllCategories();
+    setState(() {
+      _genres = categories.map((category) => category.name).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +132,7 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
                   items: _genres.map((genre) {
                     return DropdownMenuItem(
                       value: genre,
-                      child: Text(genre),
+                      child: Text(genre.toString()),
                     );
                   }).toList(),
                 ),
@@ -228,11 +204,53 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
                   labelStyle: TextStyle(color: Colors.grey[500]),
                 ),
               ),
+              const SizedBox(height: 20),
+              FloatingActionButton.extended(
+                onPressed: () {
+                  _uploadAudio(
+                    songController.text,
+                    _audio!.path,
+                    _image!.path,
+                  );
+                },
+                label: const Text('Upload'),
+                icon: const Icon(Icons.upload),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _uploadAudio(
+    String namesong,
+    String urlsong,
+    String urlimage,
+  ) async {
+    var message = 'An error occurred. Please try again later.';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String username = prefs.getString("UserName")!;
+    final response =
+        await _apiClient.addSong(namesong, urlsong, urlimage, username);
+
+    if (response != null && response.statusCode == 200) {
+      message = 'Success';
+    } else {
+      if (response != null) {
+        if (response.statusCode == 401) {
+          message = 'Invalid email or password.';
+        } else {
+          message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
+        }
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
+    }
   }
 
   Future<void> _selectAudio() async {
@@ -244,6 +262,7 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
       return;
     }
     setState(() {
+      _audio = File(result.files.single.path.toString());
       _songName = result.files.single.name;
       songController.text = _songName ?? '';
     });
@@ -272,6 +291,7 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
                   _image = File(image.path);
                 });
 
+                // ignore: use_build_context_synchronously
                 Navigator.pop(context);
               },
             ),
@@ -286,6 +306,7 @@ class _MainBodyUploadState extends State<MainBodyUpload> {
                 setState(() {
                   _image = File(image.path);
                 });
+                // ignore: use_build_context_synchronously
                 Navigator.pop(context);
               },
             ),

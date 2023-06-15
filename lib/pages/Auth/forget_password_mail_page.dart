@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../core/api_client.dart';
-import 'login_page.dart';
 import 'widgets/my_button.dart';
 import 'widgets/my_textfield.dart';
 
@@ -18,12 +17,11 @@ class _ForgetPasswordMailPageState extends State<ForgetPasswordMailPage> {
 
   void forgetPassword() async {
     final response = await _apiClient.forgetPassword(emailController.text);
-
+    var message;
     if (response != null && response.statusCode == 200) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: ((context) => LoginPage())));
+      message = 'Get new password successfully, please check your email';
     } else {
-      var message = 'An error occurred. Please try again later.';
+      message = 'An error occurred. Please try again later.';
       if (response != null) {
         if (response.statusCode == 401) {
           message = 'Invalid email';
@@ -31,13 +29,12 @@ class _ForgetPasswordMailPageState extends State<ForgetPasswordMailPage> {
           message = 'Error ${response.statusCode}: ${response.reasonPhrase}';
         }
       }
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(message),
         ),
       );
-    }
   }
 
   @override
@@ -77,7 +74,7 @@ class _ForgetPasswordMailPageState extends State<ForgetPasswordMailPage> {
                       ),
                       const SizedBox(height: 20.0),
                       MyButton(
-                        text: "Next",
+                        text: "Send",
                         onTap: () async {
                           forgetPassword();
                         },

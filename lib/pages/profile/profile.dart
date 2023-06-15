@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../model/playlist.dart';
-import '../../widgets/playlist_listview_horizontal.dart';
 import '../../widgets/repetitious_listview_vertical.dart';
 import '../../widgets/repetitious_text.dart';
 import '../ListeningHistory/listening_history.dart';
@@ -43,7 +41,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       width: currentWidth,
       height: currentHeight,
       child: SingleChildScrollView(
@@ -60,11 +58,11 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
             style: TextStyle(fontSize: 27, color: Colors.black),
           ),
           const SizedBox(height:10),
-          Container(
+          const SizedBox(
             height:20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
                   "12 Followers",
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300, color: Colors.black),
@@ -132,7 +130,7 @@ class _MainBodyProfileState extends State<MainBodyProfile> {
             const SizedBox(
               height: 5,
             ),
-            PlaylistListViewHorizontal(playlists: Playlist.album,),
+            // PlaylistListViewHorizontal(playlists: Playlist,),
 
           ],
         ),

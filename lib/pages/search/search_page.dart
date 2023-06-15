@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/api_client.dart';
 import '../../model/playlist.dart';
 import '../../model/song.dart';
 import '../../widgets/appbar.dart';
@@ -40,10 +41,22 @@ class MainBodySearch extends StatefulWidget {
 }
 
 class _MainBodySearchState extends State<MainBodySearch> {
+  final ApiClient _apiClient = ApiClient();
   TextEditingController myController = TextEditingController();
   bool showResults = false;
   bool showRecentSearches = true;
   List<String> recentSearches = [];
+  late List<Song> songsSearches;
+  late Playlist playlistSearches = Playlist(
+    id: 1,
+    name: 'Search Results',
+    profileId: '123',
+    coverUrl: 'assets/images/demo.png',
+  );
+
+  void searchAPI(String query) async {
+    songsSearches = await _apiClient.searchAPI(query);
+  }
 
   void deleteSearchResult(int index) {
     setState(() {
@@ -63,9 +76,8 @@ class _MainBodySearchState extends State<MainBodySearch> {
 
   void selectSearchResult(String searchResult) {
     setState(() {
-      // selectedSearchResult = searchResult;
       myController.text = searchResult;
-      // searchAPI(searchResult);
+      searchAPI(searchResult);
     });
   }
 
@@ -82,10 +94,10 @@ class _MainBodySearchState extends State<MainBodySearch> {
             children: <Widget>[
               if (showResults)
                 MaterialButton(
-                  minWidth: 20, 
-                  shape: CircleBorder(),
+                  minWidth: 20,
+                  shape: const CircleBorder(),
                   color: Colors.orange.shade300,
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: const Icon(
                     Icons.arrow_back,
                     size: 25,
@@ -100,8 +112,7 @@ class _MainBodySearchState extends State<MainBodySearch> {
               Container(
                 width: (showResults) ? currentWidth * 0.785 : currentWidth,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: SearchInputField(
                     myController: myController,
                     hintText: "What do you want to listen to?",
@@ -113,7 +124,7 @@ class _MainBodySearchState extends State<MainBodySearch> {
                           showRecentSearches = false;
                           showResults = true;
                         });
-                        //searchAPI(query);
+                        searchAPI(query);
                       }
                     },
                   ),
@@ -122,8 +133,7 @@ class _MainBodySearchState extends State<MainBodySearch> {
             ],
           ),
           Padding(
-            padding:
-                const EdgeInsets.only(top: 30.0, left: 18.0),
+            padding: const EdgeInsets.only(top: 30.0, left: 18.0),
             child: Text(
               (showResults) ? "Search Results" : "Recently Search",
               style: const TextStyle(
@@ -137,12 +147,12 @@ class _MainBodySearchState extends State<MainBodySearch> {
             // height: currentHeight,
             child: (showResults)
                 ? Expanded(
-                  child: SongListViewVertical(
-                      height: currentHeight-235,
-                      playlist: Playlist.dailyMix[1],
-                      songs: Playlist.dailyMix[1].songs,
+                    child: SongListViewVertical(
+                      height: currentHeight - 235,
+                      playlist: playlistSearches,
+                      songs: songsSearches,
                     ),
-                )
+                  )
                 : SizedBox(
                     child: showRecentSearches
                         ? Center(

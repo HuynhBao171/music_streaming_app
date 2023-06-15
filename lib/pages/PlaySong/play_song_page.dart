@@ -9,7 +9,7 @@ import '../../model/song.dart';
 import '../../utils/color_utils.dart';
 
 class PlaySongPage extends StatefulWidget {
-  final List<Song> playlist;
+  final List<Song>? playlist;
   final String? nameList;
   final int initialIndex;
 
@@ -54,14 +54,14 @@ class _PlaySongPageState extends State<PlaySongPage> {
   void _initAudioPlayer() {
     _audioPlayer = AudioPlayer();
     _playlist = ConcatenatingAudioSource(
-      children: widget.playlist
+      children: widget.playlist!
           .map(
-            (song) => AudioSource.uri(Uri.parse('asset:/${song.url}'),
+            (song) => AudioSource.uri(Uri.parse(song.url.toString()),
                 tag: MediaItem(
                   id: song.id.toString(),
                   title: song.name.toString(),
                   artist: song.profileId,
-                  artUri: Uri.parse('asset:/${song.coverUrl}'),
+                  artUri: Uri.parse(song.url.toString()),
                 )),
           )
           .toList(),
@@ -85,7 +85,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
         _initialIndex = newIndex ?? 0;
       });
       _updateDominantColor(
-        AssetImage(widget.playlist[_initialIndex].coverUrl.toString()),
+        NetworkImage(widget.playlist![_initialIndex].coverUrl.toString()),
       ).then((value) {
         setState(() {
           _dominantColor = value;
@@ -134,7 +134,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
   }
 
   void _next() {
-    if (_initialIndex < widget.playlist.length - 1) {
+    if (_initialIndex < widget.playlist!.length - 1) {
       _initialIndex++;
     } else {
       _initialIndex = 0;
@@ -148,7 +148,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
     if (_initialIndex > 0) {
       _initialIndex--;
     } else {
-      _initialIndex = widget.playlist.length - 1;
+      _initialIndex = widget.playlist!.length - 1;
     }
     _isPlaying = true;
     _audioPlayer.seek(const Duration(), index: _initialIndex);
@@ -238,8 +238,8 @@ class _PlaySongPageState extends State<PlaySongPage> {
               height: 350,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(
-                      widget.playlist[_initialIndex].coverUrl.toString()),
+                  image: NetworkImage(
+                      widget.playlist![_initialIndex].coverUrl.toString()),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(20),
@@ -254,7 +254,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: Text(
-                        widget.playlist[_initialIndex].name.toString(),
+                        widget.playlist![_initialIndex].name.toString(),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 24,
@@ -267,7 +267,7 @@ class _PlaySongPageState extends State<PlaySongPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: Text(
-                        widget.playlist[_initialIndex].profileId.toString(),
+                        widget.playlist![_initialIndex].profileId.toString(),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 16,
